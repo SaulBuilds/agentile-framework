@@ -1,5 +1,9 @@
 # BDD_RULES.md — Behavior-Driven Development Rules
 
+> **Every rule in this file has an enforceable gate. Features that violate these rules do not pass review.**
+
+---
+
 ## Gherkin Standards
 
 All features MUST be written in Gherkin syntax and stored in `.agentile/features/` with the `.feature` extension.
@@ -18,6 +22,10 @@ features/
 - Use kebab-case for filenames
 - Group by domain/module in subdirectories
 - One feature per file (a feature may have multiple scenarios)
+
+**GATE: Every feature file must be in the correct location with correct naming. A file named `test.feature` or placed outside `features/` fails this gate.**
+
+---
 
 ### Gherkin Syntax
 
@@ -56,13 +64,24 @@ Feature: [Short description of the feature]
 2. **When** — Describe the ACTION. One primary action per scenario.
 3. **Then** — Describe the EXPECTED OUTCOME. Observable, testable results.
 
-### Quality Checks
-- Every scenario MUST be independently runnable
-- No scenario should depend on another scenario's side effects
-- Use `Background` for shared setup, not copy-paste
-- Scenario names must be unique and descriptive
-- Avoid implementation details in Gherkin — describe BEHAVIOR not code
-- Write from the USER's perspective, not the system's
+---
+
+## Feature Completeness Gate
+
+**Every feature file MUST have ALL of the following. Missing any one fails the gate.**
+
+- [ ] `Feature:` line with a clear, concise description
+- [ ] `As a / I want / So that` block connecting to user value
+- [ ] At least ONE happy-path scenario (the thing works as expected)
+- [ ] At least ONE error/edge-case scenario (the thing fails gracefully)
+- [ ] Tags: `@sprint-N`, `@priority-{high|medium|low}`, and `@module-name`
+- [ ] Scenario names are unique, descriptive, and written in plain English
+- [ ] No implementation details in the Gherkin (describe BEHAVIOR not code)
+- [ ] Written from the USER's perspective, not the system's
+
+**GATE: Read each feature file before proceeding to tests. If any checkbox above is missing, fix the feature file first. Do not write tests against an incomplete feature.**
+
+---
 
 ### Bad vs Good
 
@@ -83,6 +102,8 @@ Scenario: Registered user can log in with valid credentials
   And a session is created
 ```
 
+---
+
 ## Feature Lifecycle
 
 1. **DRAFT**: Agent writes the feature based on planset/roadmap item
@@ -90,6 +111,10 @@ Scenario: Registered user can log in with valid credentials
 3. **ACCEPTED**: Feature is locked. Tests are written against it.
 4. **IMPLEMENTED**: All scenarios pass.
 5. **ARCHIVED**: Feature moves to `completed/` with the sprint.
+
+**GATE: A feature must reach ACCEPTED before any test code is written. If the human requests changes during REVIEW, update the feature and re-present. Do not proceed to RED phase with a DRAFT or unreviewed feature.**
+
+---
 
 ## Tagging Convention
 
@@ -106,3 +131,18 @@ Standard tags:
 - `@blocked` — Waiting on human input or external dependency
 - `@smoke` — Core smoke test scenario
 - `@edge-case` — Non-happy-path scenario
+
+**GATE: Every feature must have at minimum `@sprint-N` and `@priority-*` tags. Untagged features cannot be traced to a sprint and fail review.**
+
+---
+
+## Quality Checks
+
+- Every scenario MUST be independently runnable
+- No scenario should depend on another scenario's side effects
+- Use `Background` for shared setup, not copy-paste
+- Scenario names must be unique and descriptive
+- Avoid implementation details in Gherkin — describe BEHAVIOR not code
+- Write from the USER's perspective, not the system's
+
+**GATE: Before signing off on a feature file, mentally run each scenario in isolation. If a scenario requires another scenario to have run first, it's coupled — fix it.**

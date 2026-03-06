@@ -44,6 +44,12 @@ This is the complete index of the Agentile framework. Use this to navigate the s
 | `templates/REPORT.template.md` | Sprint/task completion report |
 | `templates/ARCHITECTURE_DECISION.template.md` | ADR template |
 | `templates/USER_STORY.template.md` | User story with acceptance criteria |
+| `templates/AGENT_HOOKS.template.md` | Hook files for different AI agents (Claude, Cursor, Copilot, etc.) |
+
+## Evaluation & Testing
+| File | Purpose |
+|------|---------|
+| `docs/EVALUATION.md` | Benchmarks for testing agent compliance with the framework |
 
 ## Living Directories
 | Directory | Purpose |
