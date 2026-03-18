@@ -28,3 +28,17 @@ build/
 coverage/
 .nyc_output/
 htmlcov/
+
+# Next.js
+.next/
+out/
+
+# Prisma
+prisma/migrations/
+
+# Foundry
+contracts/out/
+contracts/cache/
+
+# Logs
+*.log

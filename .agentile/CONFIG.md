@@ -4,57 +4,83 @@
 
 ## Project Identity
 ```yaml
-project_name: ""
-description: ""
+project_name: "Gradient Barter Protocol"
+description: "A warehouse-backed, token-assisted barter network for real-world items. Users contribute items to categorized value pools, items are verified by sorting centers, and contributors receive pool claims to withdraw equivalent items."
 version: "0.1.0"
-repository: ""
-owner: ""
+repository: "https://github.com/SaulBuilds/agentile-framework"
+owner: "SaulBuilds"
 ```
 
 ## Tech Stack
 ```yaml
-language: ""           # e.g., TypeScript, Python, Rust, Go
-framework: ""          # e.g., Next.js, Express, FastAPI, Actix
-runtime: ""            # e.g., Node 20, Python 3.12, Rust nightly
-package_manager: ""    # e.g., npm, yarn, pnpm, pip, cargo
+# Smart Contracts
+contract_language: "Solidity ^0.8.26"
+contract_framework: "Foundry"
+contract_libraries: "OpenZeppelin (access control, ERC-721, ERC-1155, pausables, reentrancy guards)"
+contract_testing: "Foundry (unit, fuzz, invariant)"
+contract_analysis: "Slither, Mythril, Echidna"
+
+# Backend
+language: "TypeScript"
+framework: "NestJS"
+runtime: "Node 20"
+package_manager: "pnpm"
+orm: "Prisma"
+database: "PostgreSQL"
+cache: "Redis + BullMQ"
+chain_interface: "viem/wagmi"
+observability: "OpenTelemetry"
+
+# Frontend
+frontend_framework: "Next.js"
+frontend_state: "TanStack Query"
+frontend_styling: "Tailwind CSS + shadcn/ui (Radix primitives)"
+mobile: "React Native / Expo"
 ```
 
 ## Testing
 ```yaml
-test_runner: ""        # e.g., jest, vitest, pytest, cargo test
-bdd_framework: ""      # e.g., cucumber-js, behave, cucumber-rs
-coverage_target: 90    # Minimum % coverage before a feature is considered done
-coverage_tool: ""      # e.g., c8, istanbul, coverage.py
+test_runner: "vitest"
+bdd_framework: "cucumber-js"
+coverage_target: 90
+coverage_tool: "c8"
+contract_test_runner: "forge test"
 ```
 
 ## CI/CD
 ```yaml
-ci_platform: ""        # e.g., GitHub Actions, GitLab CI, CircleCI
-deployment_target: ""  # e.g., Vercel, AWS, Docker, bare metal
-containerized: false   # true/false
+ci_platform: "GitHub Actions"
+deployment_target: "Vercel (web), containerized backend (ECS/Fly/Render)"
+containerized: true
 ```
 
 ## Documentation
 ```yaml
-doc_format: "markdown" # markdown, jsdoc, sphinx, rustdoc
-api_docs: false        # Generate API documentation?
-changelog: true        # Maintain CHANGELOG.md?
+doc_format: "markdown"
+api_docs: true
+changelog: true
 ```
 
 ## Agent Preferences
 ```yaml
-verbosity: "concise"         # concise | detailed | minimal
-report_frequency: "per-task" # per-task | per-sprint | on-request
-auto_commit: false           # Should the agent commit automatically?
-branch_per_feature: true     # Create a branch for each feature?
-ask_before_refactor: false   # Ask human before refactoring?
+verbosity: "concise"
+report_frequency: "per-task"
+auto_commit: false
+branch_per_feature: true
+ask_before_refactor: false
 ```
 
 ## Custom Rules
 ```yaml
-# Add project-specific rules the agent must follow
 custom_rules:
-  # - "All API routes must have rate limiting"
-  # - "Use snake_case for database columns"
-  # - "Every component must have a Storybook story"
+  - "All smart contract methods must follow CEI (Checks-Effects-Interactions) pattern"
+  - "No unbounded loops over dynamic arrays in contracts"
+  - "All signatures must use EIP-712 typed data"
+  - "Pool claims are non-transferable in v1 (allowlist-transferable ERC-1155)"
+  - "One verified contribution = one pool claim (invariant must be tested)"
+  - "No cash redemption of claims"
+  - "Avoid loan/collateral/interest terminology — use barter/contribute/claim language"
+  - "All physical events require: canonical DB row, signed actor, timestamp, evidence hash"
+  - "Restricted items matrix must be checked before any submission completes"
+  - "Proof-of-pickup and proof-of-delivery are mandatory for all logistics"
 ```

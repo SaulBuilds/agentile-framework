@@ -1,0 +1,20 @@
+{
+  "name": "gradient-barter-protocol",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm -w apps/api run start:dev",
+    "dev:web": "npm -w apps/web run dev",
+    "build:api": "npm -w apps/api run build",
+    "build:web": "npm -w apps/web run build",
+    "test:api": "npm -w apps/api run test",
+    "test:contracts": "cd contracts && forge test",
+    "lint": "npm -w apps/api run lint && npm -w apps/web run lint"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

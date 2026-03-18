@@ -1,0 +1,15 @@
+{
+  "chainId": 40204,
+  "chainName": "Citrea",
+  "nativeToken": "SALT",
+  "rpcUrl": "https://soleils-mac-studio.tailcbe2ba.ts.net/",
+  "deployer": "0x6d14Ad3151E3B5914F1312f2c2c5De1346C31637",
+  "contracts": {
+    "PoolRegistry": "0x509Bd43690F20eE36f9C4816e79aaC3fCb5F340d",
+    "ItemReceiptNFT": "0x7a45FDcEf785CE342f96d24Df16B94c8C38dD3Fa",
+    "PoolClaimToken": "0x8915B405610a75b3C1909B6fB9448de5Db58f016",
+    "InventoryCommitment": "0x3E413Dd53da0729af8745160CC482Ba6bd4bB777",
+    "DisputeResolver": "0x8b4F1f72c95dDbF59f3B8FD665a3134a088f5F89",
+    "EscrowSettlement": "0x41ba22ee648fB63Ecd0BFF7472BE972F2842E3D3"
+  }
+}
