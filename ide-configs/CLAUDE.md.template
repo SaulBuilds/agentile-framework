@@ -1,0 +1,22 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## START HERE — Agentile Framework
+
+**Before doing ANY work, read the framework entry point:**
+
+@.agentile/AGENT_ENTRY.md
+
+This repository uses the **Agentile methodology**. All governance lives in `.agentile/`:
+
+- **Entry point**: `.agentile/AGENT_ENTRY.md`
+- **Config**: `.agentile/CONFIG.md`
+- **Rules**: `.agentile/rules/CORE_RULES.md`
+- **Current work**: `.agentile/sprints/CURRENT.md`
+
+**GATE: Do NOT write code until you have read AGENT_ENTRY.md and CONFIG.md.**
+
+## Project-Specific Instructions
+
+<!-- Add your project-specific Claude Code instructions below -->

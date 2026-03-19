@@ -1,0 +1,12 @@
+This repository uses the Agentile methodology. Before writing ANY code:
+
+1. Read .agentile/AGENT_ENTRY.md (decision tree for all contributors)
+2. Read .agentile/CONFIG.md (canonical project constants)
+3. Read .agentile/rules/CORE_RULES.md (non-negotiable rules)
+4. Check .agentile/sprints/CURRENT.md (active sprint)
+
+GATE: Do NOT write code until you have read these files.
+
+Rules: No mocks/stubs/TODOs. Test count only goes up. Linting clean. Every feature traces to a sprint item.
+
+Full framework: .agentile/docs/AGENTILE_METHODOLOGY.md

@@ -1,0 +1,18 @@
+# GitHub Copilot Instructions
+
+This repository uses the **Agentile methodology** for all development.
+
+**Before writing any code, read these files in order:**
+
+1. `.agentile/AGENT_ENTRY.md` — Decision tree for all contributors
+2. `.agentile/CONFIG.md` — Canonical project constants
+3. `.agentile/rules/CORE_RULES.md` — Non-negotiable operating rules
+4. `.agentile/sprints/CURRENT.md` — Active sprint status
+
+**Non-negotiable rules:**
+- No mocks, stubs, or TODOs in production code
+- Test count must never decrease
+- Linting must be clean before commit
+- Every feature traces to a sprint item
+
+**Full framework:** `.agentile/docs/AGENTILE_METHODOLOGY.md`
