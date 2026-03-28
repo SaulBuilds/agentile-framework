@@ -33,7 +33,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[~] IN PROGRESS` |
+| **Status** | `[x] COMPLETE` |
 | **Assignee** | FORMAL_VERIFIER |
 | **Estimated effort** | L |
 | **Commit(s)** |  |
@@ -46,10 +46,10 @@ Create all TLA+ modules for concurrent subsystems as specified in The Grove docu
 - [x] Create FederationEcon.tla for reward distribution and economic safety
 - [x] Create BelnapAggregation.tla for Belnap logic classification
 - [x] Create SchoolSafety.tla for content filtering and safety properties
-- [ ] Create MentorPropagation.tla for LoRA adapter propagation
-- [ ] Create MysteryBoxRNG.tla for random reward distribution
-- [ ] Create SybilResistance.tla for attack surface protection
-- [ ] Create SeasonTransition.tla for federation lifecycle management
+- [x] Create MentorPropagation.tla for LoRA adapter propagation
+- [x] Create MysteryBoxRNG.tla for random reward distribution
+- [x] Create SybilResistance.tla for attack surface protection
+- [x] Create SeasonTransition.tla for federation lifecycle management
 
 **Acceptance Criteria:**
 - [x] All TLA+ modules compile without syntax errors
@@ -67,7 +67,7 @@ Create all TLA+ modules for concurrent subsystems as specified in The Grove docu
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` |
+| **Status** | `[x] COMPLETE` |
 | **Assignee** | DEVELOPER |
 | **Estimated effort** | L |
 | **Commit(s)** |  |
@@ -76,29 +76,38 @@ Create all TLA+ modules for concurrent subsystems as specified in The Grove docu
 Create Gherkin feature files that define observable behaviors for each game mechanic. These serve as acceptance criteria and definition of done.
 
 **Tasks:**
-- [ ] Create core feature files: seed-planting.feature, growth-cycle.feature, harvest.feature
-- [ ] Create competitive feature files: pollination-duel.feature, blight-raid.feature
-- [ ] Create school safety feature files: school-content-safety.feature
-- [ ] Create economic safety feature files: reward-distribution.feature, sybil-resistance.feature
-- [ ] Create visual feature files: garden-rendering.feature, duel-animation.feature
+- [x] Create core feature files: seed-planting.feature, growth-cycle.feature, harvest.feature
+- [x] Create competitive feature files: pollination-duel.feature, blight-raid.feature
+- [x] Create school safety feature files: school-content-safety.feature
+- [x] Create economic safety feature files: reward-distribution.feature, sybil-resistance.feature
+- [x] Create visual feature files: garden-rendering.feature, duel-animation.feature
+- [x] Create competitive feature files: mentor-propagation.feature
 
 **Acceptance Criteria:**
-- [ ] All .feature files follow Gherkin syntax
-- [ ] Each feature file references its parent TLA+ module in comments
-- [ ] Scenarios are tagged appropriately (@solo, @federated, @school, @adversarial)
-- [ ] Acceptance criteria are specific and testable
-- [ ] Feature files cover all major game mechanics from The Grove spec
+- [x] All .feature files follow Gherkin syntax
+- [x] Each feature file references its parent TLA+ module in comments
+- [x] Scenarios are tagged appropriately (@solo, @federated, @school, @adversarial)
+- [x] Acceptance criteria are specific and testable
+- [x] Feature files cover all major game mechanics from The Grove spec
 
 **Tests Added:**
 - cucumber-test-seed-planting -- verifies seed planting scenarios
 - cucumber-test-growth-cycle -- verifies growth cycle scenarios
 - cucumber-test-harvest -- verifies harvest scenarios
+- cucumber-test-pollination-duel -- verifies pollination duel scenarios
+- cucumber-test-blight-raid -- verifies blight raid scenarios
+- cucumber-test-school-safety -- verifies school safety scenarios
+- cucumber-test-reward-distribution -- verifies reward distribution scenarios
+- cucumber-test-sybil-resistance -- verifies sybil resistance scenarios
+- cucumber-test-mentor-propagation -- verifies mentor propagation scenarios
+- cucumber-test-garden-rendering -- verifies garden rendering scenarios
+- cucumber-test-duel-animation -- verifies duel animation scenarios
 
 ### WP-3: Test Harness Setup
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` |
+| **Status** | `[~] IN PROGRESS` |
 | **Assignee** | QA_ENGINEER |
 | **Estimated effort** | M |
 | **Commit(s)** |  |
@@ -107,17 +116,17 @@ Create Gherkin feature files that define observable behaviors for each game mech
 Set up the testing infrastructure including Cucumber.js + Hardhat for contract testing and p5.js snapshot testing for visual components.
 
 **Tasks:**
-- [ ] Configure Hardhat for Solidity compilation and testing
-- [ ] Set up Cucumber.js for Gherkin feature execution
-- [ ] Configure Chai and Waffle for contract testing
+- [x] Configure Hardhat for Solidity compilation and testing
+- [x] Set up Cucumber.js for Gherkin feature execution
+- [x] Configure Chai and Waffle for contract testing
 - [ ] Set up p5.js snapshot testing framework
-- [ ] Create test scripts and npm commands
+- [x] Create test scripts and npm commands
 - [ ] Establish test coverage baseline
 
 **Acceptance Criteria:**
-- [ ] All tests can be run with npm commands
-- [ ] Hardhat compiles contracts successfully
-- [ ] Cucumber.js executes Gherkin features
+- [x] All tests can be run with npm commands
+- [x] Hardhat compiles contracts successfully
+- [x] Cucumber.js executes Gherkin features
 - [ ] p5.js snapshot tests capture canvas states
 - [ ] Test coverage gates are established in coverage/GATES.md
 - [ ] CI pipeline configuration is ready
@@ -126,12 +135,13 @@ Set up the testing infrastructure including Cucumber.js + Hardhat for contract t
 - test-harness-verification -- confirms testing infrastructure works
 - contract-compilation-test -- verifies contracts compile
 - feature-execution-test -- verifies Gherkin features execute
+- test-specs-verification -- verifies TLA+ specifications can be checked
 
 ### WP-4: Specification Review and Traceability
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` |
+| **Status** | `[~] IN PROGRESS` |
 | **Assignee** | ARCHITECT |
 | **Estimated effort** | S |
 | **Commit(s)** |  |
@@ -140,18 +150,18 @@ Set up the testing infrastructure including Cucumber.js + Hardhat for contract t
 Review all specifications for completeness, consistency, and traceability between TLA+ modules and Gherkin feature files.
 
 **Tasks:**
-- [ ] Verify bidirectional traceability between TLA+ modules and .feature files
-- [ ] Ensure all game mechanics from The Grove spec are covered
-- [ ] Check for missing invariants or testable behaviors
-- [ ] Validate specification against oppositional research points
-- [ ] Create specification manifest documenting all files
+- [x] Verify bidirectional traceability between TLA+ modules and .feature files
+- [x] Ensure all game mechanics from The Grove spec are covered
+- [x] Check for missing invariants or testable behaviors
+- [x] Validate specification against oppositional research points
+- [x] Create specification manifest documenting all files
 
 **Acceptance Criteria:**
-- [ ] Every .feature file references a parent TLA+ module
-- [ ] Every TLA+ module has at least one referencing .feature file
-- [ ] All major mechanics from oppositional review are addressed
-- [ ] Specification manifest is created and maintained
-- [ ] No gaps exist between TLA+ invariants and observable behaviors
+- [x] Every .feature file references a parent TLA+ module
+- [x] Every TLA+ module has at least one referencing .feature file
+- [x] All major mechanics from oppositional review are addressed
+- [x] Specification manifest is created and maintained
+- [x] No gaps exist between TLA+ invariants and observable behaviors
 
 **Tests Added:**
 - spec-traceability-check -- verifies TLA+ to feature traceability
