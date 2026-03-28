@@ -10,7 +10,7 @@
 | **Sprint ID** | sprint-0-specification |
 | **Sprint Name** | Specification Sprint |
 | **Goal** | Write all TLA+ modules and core .feature files based on The Grove spec. Set up testing harnesses. No implementation code. |
-| **Status** | IN_PROGRESS |
+| **Status** | REVIEW |
 | **Directory** | `.agentile/sprints/active/sprint-0-specification/` |
 
 ## Test Counts

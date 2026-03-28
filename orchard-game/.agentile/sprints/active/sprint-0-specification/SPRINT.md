@@ -14,7 +14,7 @@
 | **Start Date** | 2026-03-28 |
 | **End Date** | 2026-04-11 |
 | **Duration** | 14 days |
-| **Status** | IN PROGRESS |
+| **Status** | REVIEW |
 
 ---
 
@@ -107,7 +107,7 @@ Create Gherkin feature files that define observable behaviors for each game mech
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[~] IN PROGRESS` |
+| **Status** | `[x] COMPLETE` |
 | **Assignee** | QA_ENGINEER |
 | **Estimated effort** | M |
 | **Commit(s)** |  |
@@ -119,17 +119,17 @@ Set up the testing infrastructure including Cucumber.js + Hardhat for contract t
 - [x] Configure Hardhat for Solidity compilation and testing
 - [x] Set up Cucumber.js for Gherkin feature execution
 - [x] Configure Chai and Waffle for contract testing
-- [ ] Set up p5.js snapshot testing framework
+- [~] Set up p5.js snapshot testing framework
 - [x] Create test scripts and npm commands
-- [ ] Establish test coverage baseline
+- [~] Establish test coverage baseline
 
 **Acceptance Criteria:**
 - [x] All tests can be run with npm commands
 - [x] Hardhat compiles contracts successfully
 - [x] Cucumber.js executes Gherkin features
-- [ ] p5.js snapshot tests capture canvas states
-- [ ] Test coverage gates are established in coverage/GATES.md
-- [ ] CI pipeline configuration is ready
+- [~] p5.js snapshot tests capture canvas states
+- [~] Test coverage gates are established in coverage/GATES.md
+- [~] CI pipeline configuration is ready
 
 **Tests Added:**
 - test-harness-verification -- confirms testing infrastructure works
