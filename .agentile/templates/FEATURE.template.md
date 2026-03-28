@@ -1,43 +1,98 @@
-# Feature Template
+# Feature: <Feature Name>
 
-Copy this file to `.agentile/features/[module]/[feature-name].feature` and fill in.
+> Copy this template for each significant feature. Link it from the sprint WP.
+
+---
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| **Sprint** | S-<ID> |
+| **Work Package** | WP-<N> |
+| **Author** | <name> |
+| **Date** | YYYY-MM-DD |
+| **Status** | DRAFT / IN PROGRESS / COMPLETE |
+
+---
+
+## Summary
+
+<One paragraph describing what this feature does, who it serves, and why it matters.>
+
+---
+
+## Specification
+
+### Requirements
+
+1. <Functional requirement 1>
+2. <Functional requirement 2>
+
+### Non-Functional Requirements
+
+- **Performance:** <constraints>
+- **Security:** <access control, validation>
+- **Compatibility:** <backward compatibility>
+
+---
+
+## Gherkin Feature Spec (Optional)
+
+> Required for new user-facing features. Optional for internal work.
 
 ```gherkin
-@sprint-N @priority-[high|medium|low] @[module]
-Feature: [Feature Name]
-  As a [role/persona]
-  I want [capability/action]
-  So that [business value/outcome]
+Feature: <Feature name>
+  As a <role>
+  I want <goal>
+  So that <benefit>
 
-  Background:
-    Given [shared precondition if any]
-
-  Scenario: [Happy path - descriptive name]
-    Given [initial state/context]
-    And [additional context if needed]
-    When [the primary action is taken]
-    Then [the expected outcome]
-    And [additional expected outcome]
-
-  Scenario: [Error/edge case - descriptive name]
-    Given [initial state/context]
-    When [an invalid or edge-case action is taken]
-    Then [the expected error handling/response]
-
-  Scenario Outline: [Parameterized - descriptive name]
+  Scenario: <Happy path>
     Given <precondition>
-    When <action> is performed
-    Then the result is <expected_outcome>
+    When <action>
+    Then <expected outcome>
 
-    Examples:
-      | precondition | action | expected_outcome |
-      | value1       | act1   | result1          |
-      | value2       | act2   | result2          |
+  Scenario: <Error case>
+    Given <precondition>
+    When <invalid action>
+    Then <error behavior>
 ```
 
-## Checklist Before Accepting
-- [ ] Feature traces to a planset/roadmap item
-- [ ] Scenarios cover happy path, error cases, and edge cases
-- [ ] Written from user perspective, not system perspective
-- [ ] No implementation details in the Gherkin
-- [ ] Each scenario is independently runnable
+---
+
+## Design
+
+### Affected Modules
+
+| Module | Changes |
+|--------|---------|
+| `<module>` | <brief description> |
+
+### Alternatives Considered
+
+| Option | Pros | Cons | Decision |
+|--------|------|------|----------|
+| <Option A> | <pros> | <cons> | Chosen / Rejected |
+
+---
+
+## Test Plan
+
+### Unit Tests
+
+| Test Name | What It Verifies |
+|-----------|-----------------|
+| `test_<behavior>` | <description> |
+
+---
+
+## Checklist
+
+- [ ] Specification complete
+- [ ] Gherkin feature spec written (if user-facing)
+- [ ] Failing tests written (RED)
+- [ ] Implementation complete (GREEN)
+- [ ] Code refactored (REFACTOR)
+- [ ] Full verification passes (VERIFY)
+- [ ] Documentation updated (DOCUMENT)
+- [ ] Sprint file updated (REPORT)

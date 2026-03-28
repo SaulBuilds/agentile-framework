@@ -1,148 +1,117 @@
-# TDD_RULES.md — Test-Driven Development Rules
+# TDD Rules -- Red-Green-Refactor with Gates
 
-> **Every phase transition in the Red-Green-Refactor cycle is an enforceable gate. Do not advance without proof that the current gate passes.**
-
----
-
-## The Red-Green-Refactor Cycle
-
-This is the heartbeat of Agentile development. Every feature goes through this exact cycle. No exceptions.
-
-### Phase 1: RED (Write a Failing Test)
-
-1. Read the Gherkin feature file
-2. Write a test that implements ONE scenario from the feature
-3. Run the test
-4. **CONFIRM it fails** — If it passes without implementation, your test is wrong
-5. Commit the failing test with message: `test(red): [feature-name] - [scenario-name]`
-
-**GATE: You MUST run the test and show that it fails. Paste or reference the failing output. If a test passes without implementation, the test is wrong — fix it before proceeding. Do NOT move to GREEN until you have proven RED.**
-
-### Phase 2: GREEN (Make It Pass)
-
-1. Write the MINIMUM code to make the failing test pass
-2. No optimization. No elegance. Just make it work.
-3. Run the test
-4. **CONFIRM it passes**
-5. Run the FULL test suite — nothing else should have broken
-6. Commit with message: `feat(green): [feature-name] - [scenario-name]`
-
-**GATE: Both the new test AND the full suite must pass. Show passing output. If ANY test fails (including existing tests), you have a regression — fix it before committing. Zero regressions allowed at GREEN.**
-
-### Phase 3: REFACTOR (Clean Up)
-
-1. Look at the implementation code. Is it clean? Readable? DRY?
-2. Look at the test code. Is it clear? Maintainable?
-3. Refactor as needed
-4. Run the FULL test suite after EVERY change
-5. **CONFIRM everything still passes**
-6. Commit with message: `refactor: [what was improved]`
-
-**GATE: Full suite must pass after every refactor change. If you break a test during refactor, undo the refactor and try a different approach. A refactor that breaks tests is not a refactor — it's a regression.**
+> Test-Driven Development is mandatory for all new production code.
+> Each phase has a hard gate. DO NOT PROCEED to the next phase until the gate is satisfied.
 
 ---
 
-## Test Organization
+## The Cycle
 
-Mirror the feature file structure:
 ```
-tests/
-├── features/          # BDD step definitions
-│   ├── auth/
-│   │   ├── user-login.steps.ts
-│   │   └── user-registration.steps.ts
-│   └── dashboard/
-│       └── data-display.steps.ts
-├── unit/              # Unit tests
-│   ├── services/
-│   └── utils/
-├── integration/       # Integration tests
-│   └── api/
-└── e2e/               # End-to-end tests (if applicable)
+RED ──gate──> GREEN ──gate──> REFACTOR ──gate──> COMMIT
+ │                                                  │
+ └──────────── next feature ────────────────────────┘
 ```
 
 ---
 
-## Test Quality Rules
+## Phase 1: RED -- Write a Failing Test First
 
-1. **One assertion per test** (when possible). Multiple assertions only for tightly coupled outcomes.
-2. **Descriptive test names**: `should return 401 when credentials are invalid` not `test1`
-3. **No test interdependency**: Tests must run in any order
-4. **No production state**: Tests set up and tear down their own state
-5. **Fast tests**: Unit tests should complete in milliseconds. Mock external dependencies.
-6. **Test the behavior, not the implementation**: Don't test private methods directly.
+**What to do:**
+1. Identify the behavior you are about to implement.
+2. Write a test that exercises that behavior.
+3. Run the test. It **must fail**.
 
-**GATE: Before a feature passes review, verify every test against these six rules. Tests that violate any rule must be rewritten.**
+**Rules:**
+- The test must be specific. It tests one behavior, not the entire module.
+- The test must fail for the right reason (missing function, wrong return value) -- not because of a syntax error or missing import.
+- Name the test descriptively: `test_transfer_rejects_insufficient_balance`, not `test1`.
 
----
-
-## Test Completeness Gate
-
-**Before a feature is considered tested, ALL must be true:**
-
-- [ ] Every Gherkin scenario has a corresponding test
-- [ ] Happy-path scenarios have tests
-- [ ] Error/edge-case scenarios have tests
-- [ ] Boundary conditions are tested (null, empty, max, min, off-by-one)
-- [ ] Tests run independently (no shared mutable state)
-- [ ] Test names clearly describe the behavior being verified
-
-**GATE: Count the Gherkin scenarios. Count the tests. If tests < scenarios, you're not done. If edge cases from the feature file aren't tested, you're not done.**
+**GATE:** The test must exist and must fail. If the test passes before you write the implementation, either the behavior already exists (check for duplication) or the test is wrong. DO NOT PROCEED until you have a legitimate red test.
 
 ---
 
-## Coverage Requirements
+## Phase 2: GREEN -- Minimum Code to Pass
 
-Per `CONFIG.md` settings (default: 90%):
-- All new code must meet the coverage target
-- Coverage drops are treated as test failures
-- The agent reports coverage after each feature completion
+**What to do:**
+1. Write the minimum production code that makes the failing test pass.
+2. Run the full test suite for the affected module.
+3. All tests -- including the new one -- must pass.
 
-**GATE: Run the coverage tool after GREEN phase. If coverage is below the CONFIG.md target, write additional tests before proceeding to REFACTOR. Coverage below target blocks phase advancement.**
+**Rules:**
+- Write only enough code to satisfy the test. Do not add extra functionality, optimizations, or "while I'm here" changes.
+- If the implementation requires touching multiple files, that is fine -- but all changes must be motivated by making the test pass.
+- If the implementation reveals that the test was wrong, fix the test in this phase.
 
----
-
-## When Tests Fail Unexpectedly
-
-If a previously passing test fails:
-1. **STOP** current work immediately
-2. Identify the breaking change
-3. Fix the regression BEFORE continuing with anything else
-4. Document the incident in `docs/AGENT_NOTES.md`
-
-**GATE: A regression is a P0 blocker. Everything stops until it's fixed. Do not continue feature work, do not commit, do not move on. Fix the regression first.**
+**GATE:** All tests in the affected module pass. DO NOT PROCEED to refactor while any test is red.
 
 ---
 
-## Test Naming Convention
+## Phase 3: REFACTOR -- Clean Up Without Changing Behavior
 
-```
-[unit|integration|e2e]/[module]/[feature].[test|spec].[ext]
-```
+**What to do:**
+1. Review the code you just wrote for duplication, unclear naming, excessive complexity, or missed abstractions.
+2. Refactor freely -- rename, extract functions, simplify logic.
+3. Run the full test suite again. All tests must still pass.
 
-Examples:
-- `unit/auth/login.test.ts`
-- `integration/api/user-endpoints.spec.ts`
-- `features/auth/user-login.steps.ts`
+**Rules:**
+- Do not add new behavior during refactor. If you discover a new behavior that needs to exist, start a new RED phase.
+- Do not delete or skip tests during refactor. If a test is now redundant, replace it with a better test that covers the same behavior.
+- Refactoring is not optional. Skipping it leads to code that works but nobody can maintain.
 
----
-
-## The Testing Pyramid
-
-Prioritize in this order:
-1. **Unit tests** — Fast, isolated, numerous (base of pyramid)
-2. **Integration tests** — Verify components work together
-3. **BDD/Feature tests** — Validate user-facing behavior
-4. **E2E tests** — Sparingly, for critical user journeys only
+**GATE:** All tests pass after refactoring. The refactored code is cleaner than what you started with. DO NOT PROCEED to commit while any test is red.
 
 ---
 
-## Prohibited Practices
+## Phase 4: COMMIT -- Record the Work
 
-The following are hard failures in any review:
+**What to do:**
+1. Run the full test suite.
+2. Run the linter with warnings-as-errors.
+3. Run the formatter.
+4. Commit with a conventional commit message referencing the sprint WP.
 
-- Writing implementation code before a failing test exists → **UNDO AND START OVER**
-- Committing tests that are skipped, pending, or commented out → **REMOVE OR COMPLETE THEM**
-- Tests that pass by accident (testing nothing, always-true assertions) → **FIX OR DELETE**
-- Tests with hardcoded timeouts or sleep-based synchronization → **USE PROPER ASYNC PATTERNS**
-- Tests that depend on network, filesystem, or external state without mocking → **ISOLATE THEM**
+**GATE:** All checks pass. The commit message follows Git conventions (see `GIT_RULES.md`). DO NOT PROCEED with a commit that has failing tests or lint warnings.
+
+---
+
+## Coverage Ratchet
+
+At sprint boundaries, the total passing test count is recorded.
+
+| Checkpoint | Action |
+|------------|--------|
+| Sprint start | Record baseline in `coverage/BASELINE.md` |
+| Sprint end | Record final count in sprint `REPORT.md` |
+| Comparison | Final count >= baseline count |
+
+**BLOCKER:** If the test count has decreased at sprint end, the sprint cannot close. Investigate and restore the missing tests.
+
+---
+
+## When to Skip TDD
+
+TDD is **mandatory** for:
+- All new production logic
+- All new API endpoints or commands
+- All new service functions
+
+TDD is **optional** (but recommended) for:
+- Pure documentation changes
+- Configuration file changes
+- CI/CD pipeline changes
+- Cosmetic UI changes with no logic
+
+Even when TDD is optional, the test ratchet still applies -- you must not reduce the passing test count.
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Is Wrong | What to Do Instead |
+|--------------|-----------------|---------------------|
+| Writing tests after the code | Tests become confirmations, not specifications | Write the test first (RED) |
+| Testing implementation details | Tests break on refactor | Test behavior and public API |
+| Large integration tests only | Slow feedback, hard to pinpoint failures | Write small unit tests + targeted integration tests |
+| Ignoring tests without justification | Hidden test debt | Fix the test or delete it (and replace with equivalent coverage) |
+| Commenting out failing tests | Silently reduces coverage | Fix the code or fix the test -- never comment out |

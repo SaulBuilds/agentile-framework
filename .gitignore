@@ -1,44 +1,36 @@
-# Dependencies
-node_modules/
-__pycache__/
-target/
-vendor/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
 # OS
 .DS_Store
 Thumbs.db
 
-# Environment
-.env
-.env.local
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Build
+# Dependencies
+node_modules/
+target/
+__pycache__/
+*.pyc
+
+# Build outputs
 dist/
 build/
 *.o
-*.pyc
+*.so
+*.dylib
 
-# Coverage
-coverage/
-.nyc_output/
-htmlcov/
+# Environment
+.env
+.env.local
+.env.*.local
 
-# Next.js
-.next/
-out/
-
-# Prisma
-prisma/migrations/
-
-# Foundry
-contracts/out/
-contracts/cache/
+# Secrets
+*.pem
+*.key
+credentials.json
 
 # Logs
 *.log

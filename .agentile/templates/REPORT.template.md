@@ -1,43 +1,65 @@
-# Sprint [N] Report
+# Sprint Report: S-<ID> -- <NAME>
 
-**Date**: YYYY-MM-DD
-**Sprint Goal**: [goal]
+> Generated at sprint close. This document is immutable after archiving.
+
+---
 
 ## Summary
-[2-3 sentence overview of what was accomplished]
 
-## Completed Features
-| Feature | Scenarios | Coverage | Tests |
-|---------|-----------|----------|-------|
-| [name]  | X/Y       | X%       | X passing |
+| Field | Value |
+|-------|-------|
+| **Sprint ID** | S-<ID> |
+| **Sprint Name** | <NAME> |
+| **Goal** | <Sprint goal> |
+| **Start Date** | YYYY-MM-DD |
+| **End Date** | YYYY-MM-DD |
+| **Outcome** | ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED |
 
-## Incomplete Items
-| Feature | Status | Reason | Carry to |
-|---------|--------|--------|----------|
-| [name]  | [status] | [why] | Sprint N+1 |
+---
 
-## Quality Metrics
-- **Overall Coverage**: X%
-- **Total Tests**: X passing, Y failing
-- **Regressions**: X (list if any)
-- **New Bugs Found**: X (filed to backlog)
+## Work Package Results
 
-## Key Decisions Made
-1. [Decision and rationale]
+| WP | Name | Status | Tests Added | Commits |
+|----|------|--------|-------------|---------|
+| WP-1 | <name> | COMPLETE / BLOCKED | +<N> | `<hash>` |
 
-## Blockers Encountered
-1. [Blocker, how it was resolved, time lost]
+### Completed: <N> / <total>
+### Blocked: <N> (moved to backlog)
+
+---
+
+## Test Metrics
+
+| Metric | Baseline | Final | Delta |
+|--------|----------|-------|-------|
+| Tests | <N> | <N> | +<N> |
+
+Test ratchet: **PASSED** / **FAILED**
+
+---
 
 ## Retrospective
 
 ### What Went Well
-- 
+- <Item>
 
-### What Needs Improvement
-- 
+### What Went Poorly
+- <Item>
 
-### Action Items for Next Sprint
-- 
+### What to Change
+- <Action item> (assigned to: <name/backlog>)
 
-## Next Sprint Preview
-[Brief description of planned Sprint N+1 focus]
+### Velocity Notes
+- Planned WPs: <N>
+- Completed WPs: <N>
+- Velocity: <percentage>%
+
+---
+
+## Next Sprint
+
+| Field | Value |
+|-------|-------|
+| **Sprint ID** | S-<next> |
+| **Proposed Goal** | <goal> |
+| **Carried Over** | WP-<N> |

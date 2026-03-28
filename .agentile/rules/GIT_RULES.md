@@ -1,142 +1,128 @@
-# GIT_RULES.md — Version Control Conventions
+# Git Rules
 
-> **Every commit must pass the pre-commit gate. Every merge must pass the merge gate. No exceptions.**
+> Git conventions for consistent commits, branches, and PRs.
 
 ---
 
-## Commit Message Format
+## Conventional Commits
 
-Use Conventional Commits:
+All commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+
+### Format
+
 ```
-<type>(<scope>): <short description>
+<type>(<scope>): <description>
 
 [optional body]
 
 [optional footer]
+Co-Authored-By: <name> <email>
 ```
 
 ### Types
-| Type | When |
-|------|------|
-| `feat` | New feature implementation (GREEN phase) |
-| `test` | Adding or updating tests (RED phase) |
-| `refactor` | Code improvement without behavior change (REFACTOR phase) |
-| `docs` | Documentation changes |
+
+| Type | When to Use |
+|------|-------------|
+| `feat` | New feature or capability |
 | `fix` | Bug fix |
-| `chore` | Tooling, config, dependencies |
-| `plan` | Planset or sprint planning updates |
+| `test` | Adding or modifying tests (no production code change) |
+| `docs` | Documentation-only changes |
+| `refactor` | Code restructuring without behavior change |
+| `perf` | Performance improvement |
+| `chore` | Build, CI, dependency updates, tooling |
+| `style` | Formatting, whitespace (no logic change) |
+| `revert` | Reverting a previous commit |
 
-### TDD Phase Tags
-Append the TDD phase when relevant:
-- `test(red): auth - user login scenario` — Failing test committed
-- `feat(green): auth - user login implementation` — Test now passes
-- `refactor: auth - extract token validation utility` — Cleanup
+### Scope
 
----
+The scope identifies the affected module or area. Define your project's scopes in CONFIG.md.
 
-## Pre-Commit Gate
-
-**Before EVERY commit, verify ALL of the following. If any fail, do not commit.**
-
-- [ ] The commit addresses exactly ONE logical change (not bundled)
-- [ ] The commit message follows Conventional Commits format
-- [ ] All tests pass (run the full suite, not just the changed files)
-- [ ] No unfinished code is included (no `TODO` without backlog item, no commented-out blocks, no placeholder implementations)
-- [ ] No skipped or pending tests are included (tests must be complete and passing, or not committed at all)
-- [ ] No secrets, credentials, or `.env` files are staged
-- [ ] Documentation is updated if behavior changed
-
-**GATE: A commit that includes broken tests, unfinished code, or skipped tests is a framework violation. Do not commit incomplete work. Either finish it or don't commit it.**
-
-### Prohibited in commits:
-- Tests marked as `.skip()`, `.only()`, `@skip`, `pending`, or `xit`/`xdescribe`
-- Implementation stubs that return hardcoded values (unless in RED → GREEN and it's the minimum passing implementation)
-- `console.log` or debug statements left in production code
-- Merge conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
-- Generated files that should be in `.gitignore`
-
----
-
-## Branching Strategy
+### Examples
 
 ```
-main
-├── develop
-│   ├── feature/sprint-1/user-login
-│   ├── feature/sprint-1/user-registration
-│   └── feature/sprint-2/dashboard-layout
-└── hotfix/critical-auth-bug
+feat(auth): add two-factor authentication flow
+
+Implements TOTP-based 2FA with backup codes.
+Closes WP-3.4
+Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
-- `main` — Production-ready. Only merges from `develop` after sprint completion.
-- `develop` — Integration branch. Features merge here.
-- `feature/sprint-N/feature-name` — One branch per feature.
-- `hotfix/description` — Emergency fixes branched from `main`.
+```
+fix(api): correct pagination offset calculation
+
+The offset was 1-indexed but the database query expected 0-indexed.
+Fixes WP-1.2
+```
+
+**GATE:** Commits that do not follow conventional commit format will be flagged in PR review. DO NOT PROCEED with non-conventional commit messages.
 
 ---
 
-## Merge Gate
+## Branch Naming
 
-**Before merging a feature branch to develop, ALL must be true:**
+```
+<type>/<short-description>
+```
 
-- [ ] All tests pass on the feature branch
-- [ ] Coverage meets CONFIG.md target
-- [ ] Feature has passed REVIEW_WORKFLOW.md
-- [ ] No merge conflicts (resolve before merging, not after)
-- [ ] Sprint tracker reflects the feature as DONE
-- [ ] CHANGELOG.md is updated
+| Branch Type | Pattern | Example |
+|-------------|---------|---------|
+| Feature | `feature/<description>` | `feature/two-factor-auth` |
+| Bug fix | `fix/<description>` | `fix/pagination-offset` |
+| Documentation | `docs/<description>` | `docs/api-guide-update` |
+| Refactor | `refactor/<description>` | `refactor/storage-layer` |
+| Sprint work | `sprint/<sprint-id>` | `sprint/sprint-5-hardening` |
+| Hotfix | `hotfix/<description>` | `hotfix/auth-bypass` |
 
-**GATE: A feature branch that fails any merge gate condition cannot be merged. Fix the issue on the feature branch first.**
-
----
-
-## Sprint Merge Gate
-
-**Before merging develop to main (sprint release), ALL must be true:**
-
-- [ ] Sprint review is complete (SPRINT_WORKFLOW.md review phase passed)
-- [ ] Full test suite passes on develop
-- [ ] Coverage meets or exceeds target
-- [ ] Sprint report exists in `reports/`
-- [ ] README.md is current
-- [ ] Version tag is prepared
-
-**GATE: A sprint that hasn't completed its review workflow cannot be released to main. No shortcuts.**
+**Rules:**
+- Use lowercase and hyphens only. No underscores, no uppercase.
+- Keep branch names under 50 characters.
+- Delete branches after merge.
 
 ---
 
-## Rules
+## Pull Request Requirements
 
-1. **Never commit directly to `main` or `develop`** — always use feature branches
-2. **Every feature branch must have passing tests before merge**
-3. **Squash feature branches into a single meaningful commit on merge to develop**
-4. **Tag releases**: `v0.1.0`, `v0.2.0`, etc. following semver
-5. **Commit often, push per feature** — Small, atomic commits within the branch
+Every PR must include:
 
-**GATE: If any rule is violated, the merge is blocked. Fix the violation before retrying.**
+1. **Title** following conventional commit format (under 70 characters)
+2. **Summary** section with 1-3 bullet points explaining the change
+3. **Test plan** section describing how the change was tested
+4. **Sprint reference** linking to the WP in the active sprint
+
+Use the PR template at `templates/PR.template.md`.
+
+### Required Checks Before Merge
+
+| Check | Gate Level |
+|-------|------------|
+| Tests pass | **BLOCKER** |
+| Linter clean | **BLOCKER** |
+| Formatted | **GATE** |
+| Docs updated (if API changed) | **GATE** |
 
 ---
 
-## .gitignore Considerations
+## Protected Branches
 
-The `.agentile/` folder SHOULD be committed — it's the project's planning brain. Exceptions:
-- `reports/` may be gitignored if reports are ephemeral
-- `docs/AGENT_NOTES.md` should be committed — it's valuable project history
+| Branch | Protection |
+|--------|-----------|
+| `main` | No direct pushes. PRs required. Force push prohibited. |
+| `release/*` | No direct pushes. PRs required. Release manager approval. |
+
+**BLOCKER:** Never force push to `main` or any `release/*` branch. Use `git revert` to undo changes.
 
 ---
 
-## Incomplete Work Protocol
+## AI Contributions
 
-If you need to stop work mid-feature (session ending, context limit, user request):
+All commits that include AI-generated code must include a `Co-Authored-By` footer. This provides attribution and traceability for AI-assisted work.
 
-1. **Do NOT commit half-finished code**
-2. Save your progress notes to `docs/AGENT_NOTES.md` with clear status:
-   ```markdown
-   ### [DATE] [Feature Name] — PAUSED
-   - Completed: [what's done]
-   - In progress: [what was being worked on]
-   - Next steps: [what to do when resuming]
-   - Branch: [branch name]
-   ```
-3. If tests were written but implementation isn't done, that's okay — commit the tests (RED phase) but NOT partial implementation
-4. Never leave the repo in a state where tests fail on the main working branch
+---
+
+## Commit Hygiene
+
+- **One logical change per commit.** Do not mix a feature, a bug fix, and a refactor in one commit.
+- **Write the body when the diff is not self-explanatory.**
+- **Reference the sprint WP in the footer.** `Closes WP-3.4` or `Refs WP-2.1`.
+- **Do not commit generated files.** Add build artifacts to `.gitignore`.
+- **Do not commit secrets.** Never commit private keys, API tokens, or credentials.

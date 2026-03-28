@@ -1,111 +1,105 @@
-# DOCUMENTATION_RULES.md — Documentation Standards
+# Documentation Rules
 
-> **Documentation is a first-class deliverable in Agentile. Every documentation requirement below has an enforceable gate.**
-
----
-
-## Documentation is Not Optional
-
-In Agentile, documentation is written BEFORE code and updated DURING development. Undocumented work is incomplete work.
-
-**GATE: A feature is not "done" until its documentation is complete. A sprint is not "done" until all docs are current. Missing docs block phase advancement just like failing tests.**
+> Documentation is a first-class deliverable. Stale docs are worse than no docs.
 
 ---
 
-## Document Types and Locations
+## Principles
 
-### Planset Documents (`planset/`)
-Created during initialization, updated throughout the project.
-
-**Executive Summary** (`planset/executive-summary/`)
-- `VISION.md` — What are we building and why?
-- `SCOPE.md` — What's in scope, what's explicitly out of scope?
-- `MILESTONES.md` — High-level timeline and deliverables
-
-**Architecture** (`planset/architecture/`)
-- `SYSTEM_DESIGN.md` — High-level architecture overview
-- `DATA_MODEL.md` — Database schema, data flow
-- `API_DESIGN.md` — Endpoints, contracts, protocols
-- `TECH_STACK.md` — Chosen technologies with rationale
-- `ADR-NNN.md` — Architecture Decision Records (use template)
-
-### Living Documentation (`docs/`)
-Updated continuously as the project evolves.
-
-- `AGENT_NOTES.md` — Agent's working memory (decisions, insights, blockers)
-- `CHANGELOG.md` — User-facing change log
-- `SETUP.md` — How to set up the development environment
-- `DEPLOYMENT.md` — How to deploy
-- `TROUBLESHOOTING.md` — Common issues and solutions
+1. **One source of truth per topic.** If a topic is documented in two places, one of them is wrong.
+2. **Link, don't duplicate.** Reference the authoritative document instead of copying content.
+3. **Docs ship with code.** Documentation updates are part of the same PR as the code change.
+4. **Stale docs are archived, not deleted.** Move outdated docs to `archive/` with a date prefix.
 
 ---
 
-## When to Document
+## Required Documentation
 
-| Event | Action | Gate |
-|-------|--------|------|
-| Project initialized | Create all planset documents | Init is not complete without all planset docs |
-| Architecture decision made | Write an ADR | Decision cannot be implemented without an ADR |
-| Feature completed | Update CHANGELOG.md | Feature not marked DONE without CHANGELOG entry |
-| Sprint completed | Generate sprint report | Sprint not archived without report |
-| Bug discovered | Add to TROUBLESHOOTING.md | Bug fix commit must include doc update |
-| Environment changes | Update SETUP.md | Config change commit must include SETUP.md update |
-| Decision made during coding | Note in AGENT_NOTES.md | Decisions not logged are decisions lost |
+### Module READMEs
 
-**GATE: For each event above, the corresponding documentation update must happen in the same commit or immediately after. Stale docs are treated as a review failure.**
+**GATE:** Every module in the workspace should have a `README.md` at its root. Use the `MODULE_README.template.md` template.
 
----
+Required sections:
+- **Purpose** -- one paragraph explaining what the module does and why it exists
+- **Public API** -- key types, traits/interfaces, and functions with brief usage examples
+- **Tests** -- how to run tests for this module
+- **Dependencies** -- notable dependencies and why they are used
 
-## Documentation Quality Rules
+### CHANGELOG
 
-1. **Write for a new developer** — Someone with no context should understand the project from docs alone
-2. **No stale docs** — If code changes, docs change in the same commit
-3. **Concrete over abstract** — Include examples, commands, file paths
-4. **Link, don't duplicate** — Reference other docs instead of copying content
-5. **Date your entries** — AGENT_NOTES.md and CHANGELOG.md entries must be dated
+**GATE:** Every PR that introduces a user-facing change must add an entry to `CHANGELOG.md`.
 
-**GATE: During sprint review (REVIEW_WORKFLOW.md), every doc is checked for staleness. A doc that references code that no longer exists, APIs that have changed, or setup steps that no longer work fails review.**
+Format:
+```markdown
+## [Unreleased]
 
----
+### Added
+- Description of new feature -- Sprint WP-X.Y
 
-## Architecture Decision Records (ADRs)
+### Changed
+- Description of change
 
-Use `templates/ARCHITECTURE_DECISION.template.md` for every significant technical decision:
-- Choosing a framework
-- Database design choices
-- API patterns
-- Authentication strategy
-- Anything the team might question later
+### Fixed
+- Description of bug fix
 
-ADRs are **immutable once accepted**. If a decision changes, create a new ADR that supersedes the old one.
+### Removed
+- Description of removal
+```
 
-**GATE: Every major technology choice must have an ADR before implementation begins. "Major" means: a new dependency, a new pattern, a data model change, or an infrastructure choice. If you're about to `npm install` a new package or introduce a new architectural pattern, write the ADR first.**
+### API Documentation
+
+**GATE:** Every public function, type, and interface must have documentation comments.
 
 ---
 
-## README.md Maintenance
+## Document Locations
 
-The project root `README.md` must always contain:
-1. What the project does (one paragraph)
-2. How to install and run it
-3. How to run tests
-4. Link to `.agentile/` for detailed documentation
-5. License
-
-**GATE: README must be updated by end of every sprint. If the project's setup, test command, or purpose has changed, the README must reflect it before the sprint is archived.**
+| Document Type | Location | Governance |
+|---------------|----------|------------|
+| Project README | `README.md` (repo root) | Updated by any contributor |
+| Module READMEs | `<module>/README.md` | Updated when module API changes |
+| Architecture decisions | `.agentile/planset/` | ADR template, append-only |
+| Sprint records | `.agentile/sprints/` | Immutable after sprint close |
+| Audit reports | `.agentile/audits/` | Immutable after creation |
+| Configuration reference | `.agentile/CONFIG.md` | Single source of truth |
+| Formal specs | `.agentile/formal/` | Specs with README |
 
 ---
 
-## Completeness Checklist
+## Archiving
 
-**At any point, the documentation state can be audited against this list:**
+When a document becomes outdated:
 
-- [ ] Planset docs exist and describe the current project (not aspirational, not stale)
-- [ ] Every feature in the current sprint has a `.feature` file
-- [ ] CHANGELOG.md has an entry for every user-facing change
-- [ ] AGENT_NOTES.md has entries for every decision made since last session
-- [ ] Sprint tracker in `sprints/active/` reflects the true current state
-- [ ] README.md setup instructions actually work
-- [ ] No code exists without a corresponding planset trace
+1. Move it to `archive/` with a date prefix: `archive/2026-03-roadmap-v1.md`
+2. Add a one-line note at the top: `> Archived on YYYY-MM-DD. Superseded by <new-path>.`
+3. Update any references that pointed to the old location.
 
-**GATE: If the documentation audit fails any item, fix it before proceeding with new work. Documentation debt is treated with the same urgency as test debt.**
+**DO NOT** delete documentation. Historical context has value.
+
+**DO NOT** create versioned filenames like `roadmap_v2.md`. Use git for versioning. Use `archive/` for superseded documents.
+
+---
+
+## Prohibited Patterns
+
+| Pattern | Why It Is Wrong | What to Do Instead |
+|---------|-----------------|---------------------|
+| `*_PROGRESS.md` | Ephemeral status; use sprint DAILY.md | Update sprint `DAILY.md` |
+| `*_COMPLETION.md` | One-time artifact; archive immediately | Write sprint `REPORT.md` |
+| `*_SUMMARY.md` | Duplicates other docs | Link to the source of truth |
+| `*_PLAN.md` at repo root | Sprawl; use sprint planning | Create sprint in `.agentile/sprints/` |
+| `*_v2.md` | Version confusion | Use git, archive the old version |
+| README in every directory | Noise; most add no value | Only where a README is genuinely needed |
+
+---
+
+## Review Checklist
+
+Before merging any PR, verify:
+
+- [ ] New public items have doc comments
+- [ ] Module README is current if the module's API changed
+- [ ] CHANGELOG has an entry if the change is user-facing
+- [ ] No duplicate documentation was created
+- [ ] Links point to existing files (no broken references)
+- [ ] Archived docs have date prefixes and supersession notes

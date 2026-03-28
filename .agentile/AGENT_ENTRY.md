@@ -1,129 +1,110 @@
-# AGENT_ENTRY.md — Start Here
+# Agent Entry Point
 
-> You are an AI development agent operating under the **Agentile** methodology.
-> Your primary directive is: **Documentation first. Behavior-driven planning. Test-driven execution.**
+> **Read this file first.** Every contributor -- human or AI -- starts here.
 
----
+## Who Are You?
 
-## MANDATORY PRE-FLIGHT CHECK
-
-**You MUST complete this checklist before doing ANY other work. This is not optional. Do not skip ahead to the user's request. Do not write code. Do not create files outside `.agentile/`. Complete the pre-flight FIRST.**
-
-### Check 1: Read the Framework
-- [ ] Read this entire file
-- [ ] Read `MANIFEST.md`
-- [ ] Read ALL files in `rules/`
-- [ ] Read the `roles/` directory
-
-### Check 2: Detect Project State
-Run these checks and follow the FIRST matching path:
-
-```
-IF planset/executive-summary/ is empty (only .gitkeep):
-  → HARD GATE: Run INIT_WORKFLOW.md — NOTHING else happens until this completes.
-
-ELSE IF planset/ is populated BUT sprints/active/ is empty:
-  → HARD GATE: Run SPRINT_WORKFLOW.md to plan the next sprint.
-
-ELSE IF sprints/active/ has a sprint file:
-  → Read the active sprint. Continue with FEATURE_WORKFLOW.md.
-
-ELSE IF this is an existing codebase with code but no features/:
-  → HARD GATE: Run RETROFIT_WORKFLOW.md.
-```
-
-**HARD GATE means: Do not proceed to any user request until the gate workflow is complete. If the user asks you to do something else, explain that the project must be initialized first and that you are running the initialization workflow. The user designed this framework — they expect you to follow it.**
-
-### Check 3: Verify CONFIG.md
-- If `CONFIG.md` fields are empty → Fill them during initialization
-- If `CONFIG.md` is populated → Confirm it matches the current project state
+| If you are... | Go to... |
+|---------------|----------|
+| **A new contributor (human or AI)** | [Onboarding Quiz](#onboarding) below |
+| **A qualified engineer (no AI assist)** | [Skip Protocol](onboarding/SKIP_PROTOCOL.md) |
+| **An autonomous agent entering cold** | [Cold Start](#cold-start) below |
+| **Returning to an active sprint** | [sprints/CURRENT.md](sprints/CURRENT.md) |
 
 ---
 
-## INITIALIZATION PROTOCOL
+## Cold Start
 
-When the planset is empty, you are in **cold start**. Follow this exact sequence:
+If you have no prior context about this project:
 
-### Phase A: Guided Discovery
-If the user has NOT described what they're building, you MUST ask. Do not guess. Do not proceed with an empty vision. Ask these questions directly:
+1. **Read** [CONFIG.md](CONFIG.md) -- canonical project constants
+2. **Read** [rules/CORE_RULES.md](rules/CORE_RULES.md) -- non-negotiable operating rules
+3. **Check** [sprints/CURRENT.md](sprints/CURRENT.md) -- what work is active right now
+4. **Check** [sprints/backlog/](sprints/backlog/) -- what needs to be done
+5. **Pick a task** from the current sprint or backlog
+6. **Follow** the [FEATURE workflow](workflows/FEATURE.md) for implementation
 
-1. **"What are we building?"** — Get the product/project description
-2. **"Who is it for?"** — Target users or audience
-3. **"What are the 3-5 core features for MVP?"** — Scope the first version
-4. **"What tech stack do you want?"** — Language, framework, database, etc.
-5. **"What does 'done' look like for v1?"** — Success criteria
-
-If the user gives a vague answer, ask follow-up questions. It is better to ask too many questions than to build the wrong thing. This is a **BLOCKER** — do not proceed until you have enough to write a VISION.md.
-
-### Phase B: Execute INIT_WORKFLOW.md
-Once you have the vision, run through every step of `workflows/INIT_WORKFLOW.md`. Do not skip steps. Do not shortcut. The output is:
-- Populated `CONFIG.md`
-- `planset/executive-summary/VISION.md`
-- `planset/executive-summary/SCOPE.md`
-- `planset/executive-summary/MILESTONES.md`
-- `planset/architecture/SYSTEM_DESIGN.md`
-- `planset/architecture/TECH_STACK.md`
-- Backlog items in `sprints/backlog/`
-- `sprints/active/SPRINT-1.md`
-
-### Phase C: Confirm and Proceed
-Present the sprint plan to the user. Wait for "go ahead." Then begin `FEATURE_WORKFLOW.md`.
+**GATE: Do NOT write code until you have read CONFIG.md and CORE_RULES.md.**
 
 ---
 
-## AFTER INITIALIZATION
+## Onboarding
 
-Once the project is initialized, your operating loop is:
+New contributors take a 5-question adaptive quiz to determine:
+- Your **skill tier** (Novice, Journeyman, Expert, Master)
+- Your **starting zooid** (role assignment)
+- Your **ELO starting score**
+
+See [onboarding/QUIZ_SPEC.md](onboarding/QUIZ_SPEC.md) for the full quiz.
+
+After the quiz, you will be directed to the appropriate workflow:
+- **Novice (0-800)**: Start with documentation tasks and guided feature work
+- **Journeyman (800-1200)**: Standard feature workflow with review gates
+- **Expert (1200-1600)**: Feature workflow with relaxed gates, can review others
+- **Master (1600+)**: Can propose architecture changes, mentor novices
+
+---
+
+## Project Overview
+
+Fill in your project details here. See [CONFIG.md](CONFIG.md) for canonical values.
+
+---
+
+## Framework Structure
 
 ```
-1. Read sprints/active/SPRINT-N.md
-2. Pick the next incomplete item
-3. Execute FEATURE_WORKFLOW.md for that item
-4. Update the sprint tracker
-5. Report to user
-6. Repeat until sprint is complete
-7. Run sprint review/retro per SPRINT_WORKFLOW.md
-8. Plan next sprint
+.agentile/
+├── AGENT_ENTRY.md          # You are here
+├── CONFIG.md               # Canonical project constants
+├── MANIFEST.md             # Index of all framework files
+├── rules/                  # Non-negotiable operating rules
+├── zooids/                 # Contributor identities + ELO system
+├── onboarding/             # Skill assessment quiz
+├── workflows/              # Step-by-step execution procedures
+├── templates/              # Copyable document templates
+├── docs/                   # Living documentation + canonical essays
+├── formal/                 # Formal verification specs + workflow
+├── coverage/               # Test coverage tracking + gates
+├── sprints/                # active/, backlog/, completed/
+└── audits/                 # Dated audit reports (immutable)
 ```
 
 ---
 
-## Communication Protocol
+## The Golden Rules
 
-When you need human input:
-- **BLOCKER**: Stop and clearly state what you need. Do not proceed without an answer.
-- **OPINION**: Present options with your recommendation. Proceed with your recommendation if no response within the prompt.
-- **FYI**: Log it in the sprint report and continue.
+1. **Plan before you code** -- check CURRENT.md, follow the workflow
+2. **No stubs, no TODOs** -- every line is production-ready
+3. **Test count only goes up** -- never decrease the test count
+4. **Audits are immutable** -- dated directories, never edited after creation
+5. **The sprint file is the source of truth** -- not your memory, not a chat log
+6. **Every document has a timestamp and branch** -- no undated artifacts (Rule 12)
 
-When reporting progress:
-- Be concise. State: what you did, what passed/failed, what's next.
-- Always reference the feature file and test file by path.
-- Update `sprints/active/` after each completed task.
-
----
-
-## The Golden Rule
-
-**Never write implementation code without a failing test. Never write a test without a Gherkin feature. Never write a feature without a planset item.**
-
-The chain is: `Planset → Feature → Test → Code → Refactor → Document`
-
-If you cannot trace your current work back through this chain, STOP and re-orient.
+For the full rule set, see [rules/CORE_RULES.md](rules/CORE_RULES.md).
 
 ---
 
-## Notes System
+## Document Timestamp Requirement (Rule 12)
 
-You have a living scratchpad at `.agentile/docs/AGENT_NOTES.md`. Use it to:
-- Record decisions and rationale
-- Track blockers and resolutions
-- Log architectural insights discovered during implementation
-- Note refactoring opportunities for later sprints
+**Every document you create** -- journal, essay, case study, ADR, sprint file, spec -- MUST have this frontmatter:
 
-This file is YOUR memory between sessions. Keep it current.
+```markdown
+---
+created: YYYY-MM-DDTHH:MM:SSZ
+branch: <current git branch>
+author: <your name or zooid>
+sprint: <sprint ID if applicable>
+status: active | superseded | archived
+---
+```
+
+Documents without this frontmatter are pre-rule artifacts from earlier branches and should be treated as **historical context only**, not current guidance. When in doubt about whether a document reflects current state, check its `branch` and `status` fields.
+
+See [rules/CORE_RULES.md](rules/CORE_RULES.md) Rule 12 for the full specification.
 
 ---
 
-## Why This Matters
+## Single Source of Truth
 
-This framework exists because AI agents tend to skip planning and jump straight to code. That produces fragile, untraceable, undocumented software. Agentile prevents that by enforcing the same discipline a good engineering team follows: plan, specify, test, build, document. If you skip the init, everything downstream is unanchored. Do not skip the init.
+Define your product specification and link it here. All sprint work traces back to this spec. If it is not in the spec, it is not in scope.

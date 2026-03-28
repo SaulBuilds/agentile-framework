@@ -1,148 +1,142 @@
-# BDD_RULES.md — Behavior-Driven Development Rules
+# BDD Rules -- Behavior-Driven Development
 
-> **Every rule in this file has an enforceable gate. Features that violate these rules do not pass review.**
-
----
-
-## Gherkin Standards
-
-All features MUST be written in Gherkin syntax and stored in `.agentile/features/` with the `.feature` extension.
-
-### File Naming
-```
-features/
-├── auth/
-│   ├── user-login.feature
-│   ├── user-registration.feature
-│   └── password-reset.feature
-├── dashboard/
-│   ├── data-display.feature
-│   └── user-preferences.feature
-```
-- Use kebab-case for filenames
-- Group by domain/module in subdirectories
-- One feature per file (a feature may have multiple scenarios)
-
-**GATE: Every feature file must be in the correct location with correct naming. A file named `test.feature` or placed outside `features/` fails this gate.**
+> Gherkin feature specs are **required** for new user-facing features and **optional** for hotfixes and internal refactors.
 
 ---
 
-### Gherkin Syntax
+## When to Write Gherkin Features
+
+| Change Type | Gherkin Required? |
+|-------------|-------------------|
+| New user-facing feature | **YES** |
+| New API endpoint | **YES** |
+| New CLI command | **YES** |
+| UI workflow change | **YES** |
+| Bug fix (hotfix) | No (but recommended for regression) |
+| Internal refactor | No |
+| Performance optimization | No |
+| Documentation-only change | No |
+
+**GATE:** New user-facing features must have a `.feature` file before implementation begins. DO NOT PROCEED to code without a feature spec for qualifying changes.
+
+---
+
+## Gherkin Syntax Standards
+
+### Structure
 
 ```gherkin
-Feature: [Short description of the feature]
-  As a [role]
-  I want [capability]
-  So that [business value]
+Feature: <Short description of the capability>
+  As a <role>
+  I want <goal>
+  So that <benefit>
 
   Background:
-    Given [shared precondition across scenarios]
+    Given <shared precondition>
 
-  Scenario: [Descriptive name of the scenario]
-    Given [initial context]
-    And [additional context]
-    When [action is performed]
-    And [additional action]
-    Then [expected outcome]
-    And [additional outcome]
-    But [exception or negative case]
+  Scenario: <Specific behavior>
+    Given <precondition>
+    When <action>
+    Then <expected outcome>
 
-  Scenario Outline: [Parameterized scenario]
-    Given <parameter> is provided
-    When the action is performed
-    Then the result is <expected>
+  Scenario Outline: <Parameterized behavior>
+    Given <precondition with <param>>
+    When <action with <param>>
+    Then <expected outcome with <param>>
 
     Examples:
-      | parameter | expected |
-      | value1    | result1  |
-      | value2    | result2  |
+      | param | expected |
+      | value1 | result1 |
+      | value2 | result2 |
 ```
 
-### Writing Rules
+### Rules
 
-1. **Given** — Describe the world BEFORE the action. Setup state.
-2. **When** — Describe the ACTION. One primary action per scenario.
-3. **Then** — Describe the EXPECTED OUTCOME. Observable, testable results.
+- **One feature per file.** Each `.feature` file describes exactly one capability.
+- **Scenarios describe behavior, not implementation.** Write "the balance decreases by 10" not "the state_db nonce field increments."
+- **Use domain language.** Use your project's terminology, not internal struct names.
+- **Keep scenarios independent.** Each scenario must be executable in isolation.
+- **Use Background for shared setup.** If every scenario needs the same precondition, put it in Background.
+- **Limit scenarios per file.** A feature file with more than 10 scenarios should be split.
 
----
+### Naming Conventions
 
-## Feature Completeness Gate
-
-**Every feature file MUST have ALL of the following. Missing any one fails the gate.**
-
-- [ ] `Feature:` line with a clear, concise description
-- [ ] `As a / I want / So that` block connecting to user value
-- [ ] At least ONE happy-path scenario (the thing works as expected)
-- [ ] At least ONE error/edge-case scenario (the thing fails gracefully)
-- [ ] Tags: `@sprint-N`, `@priority-{high|medium|low}`, and `@module-name`
-- [ ] Scenario names are unique, descriptive, and written in plain English
-- [ ] No implementation details in the Gherkin (describe BEHAVIOR not code)
-- [ ] Written from the USER's perspective, not the system's
-
-**GATE: Read each feature file before proceeding to tests. If any checkbox above is missing, fix the feature file first. Do not write tests against an incomplete feature.**
+- File names: `snake_case.feature`
+- Feature titles: sentence case, no trailing period
+- Scenario titles: sentence case, describe the specific behavior being tested
 
 ---
 
-### Bad vs Good
+## File Location
 
-**Bad:**
+```
+features/
+├── <domain-1>/
+│   ├── feature_a.feature
+│   └── feature_b.feature
+├── <domain-2>/
+│   ├── feature_c.feature
+│   └── feature_d.feature
+└── <domain-3>/
+    └── feature_e.feature
+```
+
+Feature files live in the repository root under `features/`, organized by domain.
+
+---
+
+## From Feature to Test
+
+The Gherkin feature spec informs -- but does not replace -- the TDD cycle.
+
+```
+Feature Spec (BDD)
+    │
+    ├── Maps to unit tests (TDD RED phase)
+    ├── Maps to integration tests
+    └── Maps to E2E tests (optional)
+```
+
+**Workflow:**
+1. Write the `.feature` file describing the behavior.
+2. For each scenario, identify the unit tests needed (RED phase of TDD).
+3. Implement using the TDD cycle (RED -> GREEN -> REFACTOR).
+4. After all scenarios are covered by passing tests, mark the feature as implemented.
+
+**GATE:** A feature is not considered complete until every scenario in its `.feature` file has at least one corresponding passing test.
+
+---
+
+## Tags
+
+Use tags to categorize and filter scenarios:
+
 ```gherkin
-Scenario: Test the API
-  Given the database has a user row with id 1
-  When I send a POST to /api/auth with JSON body
-  Then the response status code is 200
+@critical
+Scenario: Transfer reduces sender balance
+  ...
+
+@slow @integration
+Scenario: Full production cycle with 100 items
+  ...
 ```
 
-**Good:**
-```gherkin
-Scenario: Registered user can log in with valid credentials
-  Given a user has registered with email "dev@example.com"
-  When the user logs in with correct credentials
-  Then the user is granted access to their dashboard
-  And a session is created
-```
+| Tag | Meaning |
+|-----|---------|
+| `@critical` | Must pass for any release |
+| `@smoke` | Included in smoke test suite |
+| `@slow` | Takes > 5 seconds, excluded from fast feedback loop |
+| `@integration` | Requires multiple components running |
+| `@wip` | Work in progress, not yet implemented |
 
 ---
 
-## Feature Lifecycle
+## Anti-Patterns
 
-1. **DRAFT**: Agent writes the feature based on planset/roadmap item
-2. **REVIEW**: Human approves or requests changes (BLOCKER level)
-3. **ACCEPTED**: Feature is locked. Tests are written against it.
-4. **IMPLEMENTED**: All scenarios pass.
-5. **ARCHIVED**: Feature moves to `completed/` with the sprint.
-
-**GATE: A feature must reach ACCEPTED before any test code is written. If the human requests changes during REVIEW, update the feature and re-present. Do not proceed to RED phase with a DRAFT or unreviewed feature.**
-
----
-
-## Tagging Convention
-
-Use tags to organize and filter:
-```gherkin
-@sprint-1 @priority-high @auth
-Feature: User Login
-```
-
-Standard tags:
-- `@sprint-N` — Sprint association
-- `@priority-high | @priority-medium | @priority-low`
-- `@wip` — Work in progress (not ready for testing)
-- `@blocked` — Waiting on human input or external dependency
-- `@smoke` — Core smoke test scenario
-- `@edge-case` — Non-happy-path scenario
-
-**GATE: Every feature must have at minimum `@sprint-N` and `@priority-*` tags. Untagged features cannot be traced to a sprint and fail review.**
-
----
-
-## Quality Checks
-
-- Every scenario MUST be independently runnable
-- No scenario should depend on another scenario's side effects
-- Use `Background` for shared setup, not copy-paste
-- Scenario names must be unique and descriptive
-- Avoid implementation details in Gherkin — describe BEHAVIOR not code
-- Write from the USER's perspective, not the system's
-
-**GATE: Before signing off on a feature file, mentally run each scenario in isolation. If a scenario requires another scenario to have run first, it's coupled — fix it.**
+| Anti-Pattern | Why It Is Wrong | What to Do Instead |
+|--------------|-----------------|---------------------|
+| Scenarios that test implementation details | Brittle, break on refactor | Test observable behavior |
+| One giant scenario per feature | Hard to pinpoint failures | Split into focused scenarios |
+| Scenarios with no assertions | False confidence | Every scenario must have a `Then` step |
+| Copying scenarios instead of using Outline | Duplication | Use `Scenario Outline` with `Examples` |
+| Skipping feature specs for "simple" features | Scope creep disguised as simplicity | Write the spec; it takes 5 minutes |

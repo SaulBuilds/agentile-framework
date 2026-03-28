@@ -1,64 +1,113 @@
-# MANIFEST.md — Framework Index
+# Framework Manifest
 
-This is the complete index of the Agentile framework. Use this to navigate the system.
+> Complete index of all files in `.agentile/`. Updated with each sprint.
 
-## Entry Point
+## Core Files
+
 | File | Purpose |
 |------|---------|
-| `AGENT_ENTRY.md` | First file the agent reads. Orientation and decision tree. |
-| `MANIFEST.md` | This file. Directory of everything. |
-| `CONFIG.md` | Project-specific settings (language, framework, test runner, etc.) |
+| [AGENT_ENTRY.md](AGENT_ENTRY.md) | Entry point -- start here |
+| [CONFIG.md](CONFIG.md) | Canonical project constants |
+| [MANIFEST.md](MANIFEST.md) | This file -- framework index |
 
-## Rules (Non-Negotiable)
+## Rules
+
 | File | Purpose |
 |------|---------|
-| `rules/CORE_RULES.md` | Fundamental operating principles |
-| `rules/BDD_RULES.md` | Gherkin syntax and feature file standards |
-| `rules/TDD_RULES.md` | Red-Green-Refactor cycle rules |
-| `rules/DOCUMENTATION_RULES.md` | What to document, when, and where |
-| `rules/GIT_RULES.md` | Commit messages, branching, PR conventions |
+| [rules/CORE_RULES.md](rules/CORE_RULES.md) | 13 non-negotiable operating rules (0-12) |
+| [rules/TDD_RULES.md](rules/TDD_RULES.md) | Test-driven development cycle + gates |
+| [rules/BDD_RULES.md](rules/BDD_RULES.md) | Behavior-driven development (optional for hotfixes) |
+| [rules/DOCUMENTATION_RULES.md](rules/DOCUMENTATION_RULES.md) | Documentation governance |
+| [rules/GIT_RULES.md](rules/GIT_RULES.md) | Git conventions + PR templates |
+| [rules/FORMAL_VERIFICATION_RULES.md](rules/FORMAL_VERIFICATION_RULES.md) | TLA+ requirements |
 
-## Roles (Agent Personas)
+## Zooids (Contributor Identities)
+
 | File | Purpose |
 |------|---------|
-| `roles/ARCHITECT.md` | System design, ADRs, tech stack decisions |
-| `roles/DEVELOPER.md` | Feature implementation via TDD |
-| `roles/QA_ENGINEER.md` | Test coverage, edge cases, quality gates |
-| `roles/SCRUM_MASTER.md` | Sprint management, velocity, reporting |
-| `roles/TECH_WRITER.md` | README, API docs, changelogs |
+| [zooids/ARCHITECT.md](zooids/ARCHITECT.md) | System design identity |
+| [zooids/DEVELOPER.md](zooids/DEVELOPER.md) | Implementation identity |
+| [zooids/QA_ENGINEER.md](zooids/QA_ENGINEER.md) | Quality assurance identity |
+| [zooids/SCRUM_MASTER.md](zooids/SCRUM_MASTER.md) | Sprint management identity |
+| [zooids/TECH_WRITER.md](zooids/TECH_WRITER.md) | Documentation identity |
+| [zooids/FORMAL_VERIFIER.md](zooids/FORMAL_VERIFIER.md) | Formal verification identity |
+| [zooids/ELO_SYSTEM.md](zooids/ELO_SYSTEM.md) | Scoring algorithm + tiers |
 
-## Workflows (Step-by-Step)
+## Onboarding
+
 | File | Purpose |
 |------|---------|
-| `workflows/INIT_WORKFLOW.md` | New project initialization |
-| `workflows/SPRINT_WORKFLOW.md` | Sprint lifecycle |
-| `workflows/FEATURE_WORKFLOW.md` | Feature development lifecycle |
-| `workflows/RETROFIT_WORKFLOW.md` | Adopting Agentile in an existing repo |
-| `workflows/REVIEW_WORKFLOW.md` | Code review and quality gates |
+| [onboarding/QUIZ_SPEC.md](onboarding/QUIZ_SPEC.md) | 5-question adaptive skill assessment |
+| [onboarding/SKIP_PROTOCOL.md](onboarding/SKIP_PROTOCOL.md) | Bypass path for qualified engineers |
 
-## Templates (Copy & Fill)
+## Workflows
+
 | File | Purpose |
 |------|---------|
-| `templates/FEATURE.template.md` | Gherkin feature file template |
-| `templates/SPRINT.template.md` | Sprint planning document |
-| `templates/REPORT.template.md` | Sprint/task completion report |
-| `templates/ARCHITECTURE_DECISION.template.md` | ADR template |
-| `templates/USER_STORY.template.md` | User story with acceptance criteria |
-| `templates/AGENT_HOOKS.template.md` | Hook files for different AI agents (Claude, Cursor, Copilot, etc.) |
+| [workflows/INIT.md](workflows/INIT.md) | Cold start -- first-time setup |
+| [workflows/SPRINT.md](workflows/SPRINT.md) | Sprint lifecycle |
+| [workflows/FEATURE.md](workflows/FEATURE.md) | Feature implementation loop |
+| [workflows/RETROFIT.md](workflows/RETROFIT.md) | Adopting agentile in existing codebases |
+| [workflows/REVIEW.md](workflows/REVIEW.md) | Quality gates for completion |
+| [workflows/DEBUGGING.md](workflows/DEBUGGING.md) | Systematic debugging cycle |
 
-## Evaluation & Testing
+## Templates
+
 | File | Purpose |
 |------|---------|
-| `docs/EVALUATION.md` | Benchmarks for testing agent compliance with the framework |
+| [templates/SPRINT.template.md](templates/SPRINT.template.md) | Sprint planning document |
+| [templates/FEATURE.template.md](templates/FEATURE.template.md) | Feature specification |
+| [templates/ADR.template.md](templates/ADR.template.md) | Architecture Decision Record |
+| [templates/REPORT.template.md](templates/REPORT.template.md) | Sprint report |
+| [templates/MODULE_README.template.md](templates/MODULE_README.template.md) | Per-module README |
+| [templates/PR.template.md](templates/PR.template.md) | Pull request |
 
-## Living Directories
-| Directory | Purpose |
-|-----------|---------|
-| `planset/executive-summary/` | Project vision, whitepaper, business case |
-| `planset/architecture/` | System design, diagrams, ADRs |
-| `features/` | Gherkin `.feature` files |
-| `sprints/backlog/` | Unscheduled work items |
-| `sprints/active/` | Current sprint plan and progress |
-| `sprints/completed/` | Archived sprints with retrospectives |
-| `reports/` | Agent-generated progress reports |
-| `docs/` | Living project documentation |
+## Documentation
+
+| File | Purpose |
+|------|---------|
+| [docs/AGENTILE_METHODOLOGY.md](docs/AGENTILE_METHODOLOGY.md) | Framework specification (essay) |
+| [docs/JOURNAL_RULES.md](docs/JOURNAL_RULES.md) | Sprint journaling & introspection rules |
+
+## Essays (Methodology Insights)
+
+| File | Purpose |
+|------|---------|
+| [docs/essays/THE_RULE_FOLLOWERS_PARADOX.md](docs/essays/THE_RULE_FOLLOWERS_PARADOX.md) | Wittgenstein and AI rule-following |
+| [docs/essays/THE_COMPOUND_INTEREST_OF_TESTING.md](docs/essays/THE_COMPOUND_INTEREST_OF_TESTING.md) | Why test investment compounds |
+| [docs/essays/THE_HANDOVER.md](docs/essays/THE_HANDOVER.md) | Agent-to-agent state transfer |
+| [docs/essays/THE_SECOND_PAIR_OF_EYES.md](docs/essays/THE_SECOND_PAIR_OF_EYES.md) | Multi-model audit perspectives |
+
+## Case Studies
+
+| File | Purpose |
+|------|---------|
+| [docs/case_studies/MOCK_PERSISTENCE.md](docs/case_studies/MOCK_PERSISTENCE.md) | Why temporary code becomes permanent |
+
+## Formal Verification
+
+| File | Purpose |
+|------|---------|
+| [formal/VERIFICATION_WORKFLOW.md](formal/VERIFICATION_WORKFLOW.md) | When and how to write specs |
+
+## Coverage
+
+| File | Purpose |
+|------|---------|
+| [coverage/BASELINE.md](coverage/BASELINE.md) | Current test counts |
+| [coverage/GATES.md](coverage/GATES.md) | Minimum coverage requirements |
+
+## Sprints
+
+| File | Purpose |
+|------|---------|
+| [sprints/CURRENT.md](sprints/CURRENT.md) | Active sprint status |
+| [sprints/active/](sprints/active/) | Current sprint work |
+| [sprints/backlog/](sprints/backlog/) | Prioritized backlog |
+| [sprints/completed/](sprints/completed/) | Archived sprint directories |
+
+## Audits
+
+| File | Purpose |
+|------|---------|
+| [audits/README.md](audits/README.md) | Audit directory instructions |
