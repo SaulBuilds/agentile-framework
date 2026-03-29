@@ -10,7 +10,7 @@
 | **Sprint ID** | sprint-1-solo-loop |
 | **Sprint Name** | Solo Game Loop |
 | **Goal** | Implement the solo game loop: SeedNFT contract, GrowthEngine, and p5.js garden renderer. This is a single-player experience that works with one node. |
-| **Status** | IN_PROGRESS |
+| **Status** | COMPLETE |
 | **Directory** | `.agentile/sprints/active/sprint-1-solo-loop/` |
 
 ## Test Counts
