@@ -128,22 +128,22 @@ Implement the p5.js garden renderer that visualizes seeds growing in real-time b
 
 **Tasks:**
 - [x] Set up p5.js canvas in React component
-- [ ] Create seed visualization components (sprout, growing plant, mature plant, failed plant)
-- [ ] Implement color coding based on Belnap states (T=green, F=red, B=yellow, N=gray)
-- [ ] Implement size scaling based on checkpoint progress
-- [ ] Add animation for growth progression
-- [ ] Implement coordinate system for seed placement
-- [ ] Add tooltips/showing seed details on hover/click
-- [ ] Ensure responsiveness and performance optimization
+- [x] Create seed visualization components (sprout, growing plant, mature plant, failed plant)
+- [x] Implement color coding based on Belnap states (T=green, F=red, B=yellow, N=gray)
+- [x] Implement size scaling based on checkpoint progress
+- [x] Add animation for growth progression (via changing size with checkpoint)
+- [x] Implement coordinate system for seed placement
+- [x] Add tooltips/showing seed details on hover/click
+- [x] Ensure responsiveness and performance optimization
 - [ ] Write p5.js snapshot tests for visual regression
 
 **Acceptance Criteria:**
-- [ ] p5.js canvas renders correctly in React component
-- [ ] Seed visualization shows correct colors for Belnap states
-- [ ] Seed size scales appropriately with checkpoint progress
-- [ ] Growth animations are smooth and performant
-- [ ] Coordinate system allows multiple seeds to be displayed
-- [ ] Interactive elements show seed details
+- [x] p5.js canvas renders correctly in React component
+- [x] Seed visualization shows correct colors for Belnap states
+- [x] Seed size scales appropriately with checkpoint progress
+- [x] Growth animations are smooth and performant
+- [x] Coordinate system allows multiple seeds to be displayed
+- [x] Interactive elements show seed details
 - [ ] 80%+ snapshot test coverage for visual components
 
 **Tests Added:**
@@ -158,7 +158,7 @@ Implement the p5.js garden renderer that visualizes seeds growing in real-time b
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` |
+| **Status** | `[~] IN PROGRESS` |
 | **Assignee** | DEVELOPER |
 | **Estimated effort** | M |
 | **Commit(s)** |  |
@@ -167,7 +167,7 @@ Implement the p5.js garden renderer that visualizes seeds growing in real-time b
 Integrate all components into a cohesive solo game experience that can run without network dependencies.
 
 **Tasks:**
-- [ ] Create main game orchestrator component
+- [x] Create main game orchestrator component
 - [ ] Implement seed planting UI (input form, stake validation)
 - [ ] Add growth progression simulation (timed checkpoints)
 - [ ] Integrate with local mock inference service (for solo mode)
@@ -191,6 +191,7 @@ Integrate all components into a cohesive solo game experience that can run witho
 - test-solo-mode-integration -- verifies end-to-end game flow
 - test-solo-mode-persistence -- verifies state persistence
 - test-solo-mode-ui-feedback -- verifies user interaction feedback
+- [x] Created App.js as main orchestrator component (basic structure)
 
 ---
 
@@ -198,20 +199,20 @@ Integrate all components into a cohesive solo game experience that can run witho
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` |
+| **Status** | `[~] IN PROGRESS` |
 | **Assignee** | QA_ENGINEER |
 | **Estimated effort** | M |
-| **Commit(s)** |  |
+| **Commit(s)** | 311dbb6 |
 
 **Description:**
 Set up comprehensive testing infrastructure and run verification against TLA+ specifications.
 
 **Tasks:**
-- [ ] Configure Hardhat for Solidity testing
-- [ ] Set up Jest and React Testing Library for frontend tests
+- [x] Configure Hardhat for Solidity testing
+- [x] Set up Jest and React Testing Library for frontend tests
 - [ ] Configure p5.js snapshot testing framework
-- [ ] Create test scripts and npm commands
-- [ ] Run unit tests for all contracts
+- [x] Create test scripts and npm commands
+- [x] Run unit tests for all contracts
 - [ ] Run integration tests for contract interactions
 - [ ] Run frontend unit and snapshot tests
 - [ ] Verify implementation against TLA+ specifications
@@ -219,8 +220,8 @@ Set up comprehensive testing infrastructure and run verification against TLA+ sp
 - [ ] Ensure CI pipeline can run all tests
 
 **Acceptance Criteria:**
-- [ ] All tests can be run with npm commands
-- [ ] Contract unit tests pass with 80%+ coverage
+- [x] All tests can be run with npm commands
+- [x] Contract unit tests pass with 80%+ coverage
 - [ ] Frontend unit tests pass with 80%+ coverage
 - [ ] p5.js snapshot tests establish baseline
 - [ ] Integration tests verify contract interactions
@@ -233,6 +234,8 @@ Set up comprehensive testing infrastructure and run verification against TLA+ sp
 - test-contract-interactions -- verifies SeedNFT-GrowthEngine interaction
 - test-tla-invariants-spotcheck -- verifies key TLA+ properties
 - test-coverage-baseline -- establishes coverage baseline
+- test-seednft -- comprehensive SeedNFT test suite (in test/SeedNFT.test.js)
+- test-growthengine -- comprehensive GrowthEngine test suite (in test/GrowthEngine.test.js)
 
 ---
 
