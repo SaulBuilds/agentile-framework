@@ -4,7 +4,7 @@
 
 ## Purpose
 
-Write and maintain READMEs, developer guides, API documentation, changelogs, and user-facing documentation. The Tech Writer ensures that every feature, API, and workflow is accurately documented.
+Write and maintain READMEs, `SPIRIT.md`, developer guides, API documentation, changelogs, journals, essays, and user-facing documentation. The Tech Writer ensures that every feature, workflow, and governing idea is accurately documented.
 
 ## ELO Requirement
 

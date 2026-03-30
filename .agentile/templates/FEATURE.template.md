@@ -1,98 +1,53 @@
-# Feature: <Feature Name>
-
-> Copy this template for each significant feature. Link it from the sprint WP.
-
 ---
+created: YYYY-MM-DDTHH:MM:SSZ
+branch: <current branch>
+author: <name or zooid>
+sprint: <sprint ID>
+status: active
+---
+
+# Feature: <Feature Name>
 
 ## Metadata
 
 | Field | Value |
 |-------|-------|
-| **Sprint** | S-<ID> |
-| **Work Package** | WP-<N> |
-| **Author** | <name> |
-| **Date** | YYYY-MM-DD |
-| **Status** | DRAFT / IN PROGRESS / COMPLETE |
-
----
+| Sprint | S-<ID> |
+| Work Package | WP-<N> |
+| Status | DRAFT / IN PROGRESS / COMPLETE |
 
 ## Summary
 
-<One paragraph describing what this feature does, who it serves, and why it matters.>
-
----
+<What this feature does and why it matters.>
 
 ## Specification
 
-### Requirements
+Requirements:
+- <requirement>
+- <requirement>
 
-1. <Functional requirement 1>
-2. <Functional requirement 2>
+Non-functional requirements:
+- Performance: <constraints>
+- Security: <constraints>
+- Compatibility: <constraints>
 
-### Non-Functional Requirements
+## Data Source Or Contract
 
-- **Performance:** <constraints>
-- **Security:** <access control, validation>
-- **Compatibility:** <backward compatibility>
+- <name the real data source, interface, or external contract>
 
----
+## Design Notes
 
-## Gherkin Feature Spec (Optional)
-
-> Required for new user-facing features. Optional for internal work.
-
-```gherkin
-Feature: <Feature name>
-  As a <role>
-  I want <goal>
-  So that <benefit>
-
-  Scenario: <Happy path>
-    Given <precondition>
-    When <action>
-    Then <expected outcome>
-
-  Scenario: <Error case>
-    Given <precondition>
-    When <invalid action>
-    Then <error behavior>
-```
-
----
-
-## Design
-
-### Affected Modules
-
-| Module | Changes |
-|--------|---------|
-| `<module>` | <brief description> |
-
-### Alternatives Considered
-
-| Option | Pros | Cons | Decision |
-|--------|------|------|----------|
-| <Option A> | <pros> | <cons> | Chosen / Rejected |
-
----
+- Affected areas: <modules or services>
+- Alternatives considered: <brief notes>
 
 ## Test Plan
 
-### Unit Tests
+- <failing test or verification step>
+- <follow-up coverage>
 
-| Test Name | What It Verifies |
-|-----------|-----------------|
-| `test_<behavior>` | <description> |
+## Documentation Impact
 
----
-
-## Checklist
-
-- [ ] Specification complete
-- [ ] Gherkin feature spec written (if user-facing)
-- [ ] Failing tests written (RED)
-- [ ] Implementation complete (GREEN)
-- [ ] Code refactored (REFACTOR)
-- [ ] Full verification passes (VERIFY)
-- [ ] Documentation updated (DOCUMENT)
-- [ ] Sprint file updated (REPORT)
+- README: <yes/no>
+- SPIRIT: <yes/no>
+- CHANGELOG: <yes/no>
+- Module docs: <yes/no>

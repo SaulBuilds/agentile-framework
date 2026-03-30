@@ -1,105 +1,85 @@
 # Documentation Rules
 
-> Documentation is a first-class deliverable. Stale docs are worse than no docs.
-
----
+Documentation is part of the product contract. If code changes truth, docs change with it.
 
 ## Principles
 
-1. **One source of truth per topic.** If a topic is documented in two places, one of them is wrong.
-2. **Link, don't duplicate.** Reference the authoritative document instead of copying content.
-3. **Docs ship with code.** Documentation updates are part of the same PR as the code change.
-4. **Stale docs are archived, not deleted.** Move outdated docs to `archive/` with a date prefix.
+1. One source of truth per topic.
+2. Link instead of duplicating.
+3. Docs ship with the code that changes them.
+4. Historical context is archived, not silently rewritten.
+5. Starter boilerplate must not masquerade as project truth.
 
----
+## Required Root Documents
 
-## Required Documentation
+### `README.md`
 
-### Module READMEs
+The root README should describe the actual project, not the framework starter.
 
-**GATE:** Every module in the workspace should have a `README.md` at its root. Use the `MODULE_README.template.md` template.
+Gate:
+- if the repo still uses starter framing, fix it early
+- if project-facing behavior changes, update the README in the same PR
 
-Required sections:
-- **Purpose** -- one paragraph explaining what the module does and why it exists
-- **Public API** -- key types, traits/interfaces, and functions with brief usage examples
-- **Tests** -- how to run tests for this module
-- **Dependencies** -- notable dependencies and why they are used
+### `SPIRIT.md`
 
-### CHANGELOG
+The root spirit defines local collaboration norms and what the project is protecting.
 
-**GATE:** Every PR that introduces a user-facing change must add an entry to `CHANGELOG.md`.
+Gate:
+- every adopted project should have one
+- if governance or collaboration norms change, update it explicitly
+- do not let agents quietly rewrite it to bless shortcuts
 
-Format:
-```markdown
-## [Unreleased]
+### `CHANGELOG.md`
 
-### Added
-- Description of new feature -- Sprint WP-X.Y
+Gate: user-facing changes should update `CHANGELOG.md`.
 
-### Changed
-- Description of change
+## Module READMEs
 
-### Fixed
-- Description of bug fix
+Module READMEs are required where a module has meaningful public behavior or operational expectations.
 
-### Removed
-- Description of removal
-```
+Gate: if a module's public contract changes, update its README.
 
-### API Documentation
+## API Documentation
 
-**GATE:** Every public function, type, and interface must have documentation comments.
+Public functions, types, interfaces, endpoints, or commands should have local documentation comments or equivalent reference docs.
 
----
+## Insight Artifacts
 
-## Document Locations
+Journals, essays, and case studies are documentation when they carry durable engineering truth.
 
-| Document Type | Location | Governance |
-|---------------|----------|------------|
-| Project README | `README.md` (repo root) | Updated by any contributor |
-| Module READMEs | `<module>/README.md` | Updated when module API changes |
-| Architecture decisions | `.agentile/planset/` | ADR template, append-only |
-| Sprint records | `.agentile/sprints/` | Immutable after sprint close |
-| Audit reports | `.agentile/audits/` | Immutable after creation |
-| Configuration reference | `.agentile/CONFIG.md` | Single source of truth |
-| Formal specs | `.agentile/formal/` | Specs with README |
+Gate:
+- if a review, debugging cycle, or sprint produces novel reusable insight, capture it
+- do not rely on chat logs as the only record
 
----
+## Canonical Locations
 
-## Archiving
-
-When a document becomes outdated:
-
-1. Move it to `archive/` with a date prefix: `archive/2026-03-roadmap-v1.md`
-2. Add a one-line note at the top: `> Archived on YYYY-MM-DD. Superseded by <new-path>.`
-3. Update any references that pointed to the old location.
-
-**DO NOT** delete documentation. Historical context has value.
-
-**DO NOT** create versioned filenames like `roadmap_v2.md`. Use git for versioning. Use `archive/` for superseded documents.
-
----
+| Document Type | Location |
+|---------------|----------|
+| Project overview | `README.md` |
+| Project spirit | `SPIRIT.md` |
+| Changelog | `CHANGELOG.md` |
+| Sprint records | `.agentile/sprints/` |
+| Journals | sprint `JOURNAL.md` and `.agentile/docs/journals/` |
+| Essays | `.agentile/docs/essays/` |
+| Case studies | `.agentile/docs/case_studies/` |
+| Configuration | `.agentile/CONFIG.md` |
+| ADRs / specs | `.agentile/` project-selected locations |
 
 ## Prohibited Patterns
 
-| Pattern | Why It Is Wrong | What to Do Instead |
-|---------|-----------------|---------------------|
-| `*_PROGRESS.md` | Ephemeral status; use sprint DAILY.md | Update sprint `DAILY.md` |
-| `*_COMPLETION.md` | One-time artifact; archive immediately | Write sprint `REPORT.md` |
-| `*_SUMMARY.md` | Duplicates other docs | Link to the source of truth |
-| `*_PLAN.md` at repo root | Sprawl; use sprint planning | Create sprint in `.agentile/sprints/` |
-| `*_v2.md` | Version confusion | Use git, archive the old version |
-| README in every directory | Noise; most add no value | Only where a README is genuinely needed |
-
----
+| Pattern | Why It Is Wrong | Use Instead |
+|---------|-----------------|-------------|
+| Starter README left in place | Misleads every new contributor | Rewrite the root README early |
+| Starter spirit left in place | The repo has no local intent | Rewrite `SPIRIT.md` from `SPIRIT_GUIDE.md` |
+| Valuable lesson only in chat | Lost institutional memory | Journal, essay, or case study |
+| Versioned doc filenames like `_v2` | Drift and confusion | Git history plus archive notes |
+| Duplicate summaries | Competing truths | Link to the canonical source |
 
 ## Review Checklist
 
-Before merging any PR, verify:
-
-- [ ] New public items have doc comments
-- [ ] Module README is current if the module's API changed
-- [ ] CHANGELOG has an entry if the change is user-facing
-- [ ] No duplicate documentation was created
-- [ ] Links point to existing files (no broken references)
-- [ ] Archived docs have date prefixes and supersession notes
+- [ ] Root README reflects the real project
+- [ ] Root SPIRIT reflects current collaboration norms
+- [ ] CHANGELOG updated if user-facing behavior changed
+- [ ] Module docs updated where needed
+- [ ] Sprint and insight artifacts reflect reality
+- [ ] No duplicate or stale truth was introduced

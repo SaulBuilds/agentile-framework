@@ -71,7 +71,7 @@ Journals are more honest than ADRs because they are written before decisions are
 
 ### The Framework as External Memory
 
-The `.agentile/` directory is not supplementary documentation. It is the agent's brain between sessions. CURRENT.md is working memory. DAILY.md is episodic memory. CONFIG.md is semantic memory. Without these files, the agent spends 10-15 minutes re-deriving context. With them, 30 seconds.
+The `.agentile/` directory is not supplementary documentation. It is the agent's brain between sessions. `SPIRIT.md` carries local intent. `CURRENT.md` is working memory. `DAILY.md` captures motion. `JOURNAL.md` captures interpretation. `CONFIG.md` is semantic memory. Without these files, the agent spends 10-15 minutes re-deriving context. With them, 30 seconds.
 
 ### Human Pushback Is the Highest-Value Quality Gate
 
@@ -83,7 +83,7 @@ The agent will optimize for "tests pass." The human must demand "feature works."
 
 ### If You Are Starting a New Project with AI
 
-1. **Write your AGENT_ENTRY.md before you write any code.** Every minute spent on this file saves an hour of confused agent behavior later.
+1. **Write your AGENT_ENTRY.md and SPIRIT.md before you write any code.** Every minute spent on those files saves an hour of confused agent behavior later.
 
 2. **Use `.agentile/sprints/CURRENT.md` from day one.** Even if your first sprint is "Sprint 1: Hello World."
 
@@ -97,8 +97,8 @@ The agent will optimize for "tests pass." The human must demand "feature works."
 
 Your human is counting on you to maintain context across sessions. The way you do this is not by remembering -- you cannot. The way you do this is by reading the right files at the start of every session and writing the right files at the end.
 
-Read `CURRENT.md` first. Always.
-Write `DAILY.md` last. Always.
+Read `SPIRIT.md` and `CURRENT.md` first. Always.
+Write `DAILY.md` and `JOURNAL.md` before you leave. Always.
 Everything in between is the work.
 
 ---

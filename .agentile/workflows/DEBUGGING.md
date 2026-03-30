@@ -1,88 +1,67 @@
-# DEBUGGING Workflow
+# Workflow: DEBUGGING
 
-> The original workflows (FEATURE, SPRINT, REVIEW) cover building and checking.
-> This workflow covers understanding and fixing.
+Use this workflow when the system is failing, the repo state is unclear, CI is red, or pre-prod hardening reveals unstable behavior.
 
-## When to Use
+## The Cycle
 
-Use DEBUGGING when:
-- A feature that should work doesn't
-- The system is in an unknown state
-- Multiple things appear broken at once
-- You've been fixing symptoms for > 30 minutes without progress
+```text
+OBSERVE -> HYPOTHESIZE -> VERIFY -> ISOLATE -> FIX -> REGRESS
+```
 
-## The 6-Step Cycle (OHVIRF)
+## 1. OBSERVE
 
-### 1. OBSERVE -- Don't touch anything
+Do not change code yet. Map the current state:
+- failing checks
+- logs
+- configs
+- processes
+- connected services
+- user-visible behavior
 
-**Gate: No code changes until observation is complete.**
+Gate: you have a written state snapshot.
 
-Map the actual state of the system:
-- What processes are running?
-- What ports are in use?
-- What database/service is each component connected to?
-- What do the logs say? (not what you think they say)
-- What does the user actually see vs what they should see?
+## 2. HYPOTHESIZE
 
-**Deliverable**: A state snapshot written down (not in your head).
+Write a falsifiable claim about the root cause.
 
-### 2. HYPOTHESIZE -- Write it down before opening any file
+Gate: you can explain how to disprove your theory.
 
-State your theory as a testable claim:
-- BAD: "The system is broken"
-- GOOD: "The API shows 0 results because `get_items` reads from the test database (port 5433), which is empty, instead of the production database (port 5432) where the data was inserted"
+## 3. VERIFY
 
-**Gate: The hypothesis must be falsifiable. If you can't describe how to disprove it, it's not specific enough.**
+Use evidence, not edits:
+- inspect data
+- run commands
+- compare expected vs actual
+- read logs and configs
 
-### 3. VERIFY -- Prove it with data, not code
+Gate: the hypothesis is confirmed or rejected by evidence.
 
-Run commands. Check responses. Read actual values.
-- Query the API
-- Check the config
-- Compare expected vs actual values
-- Read the logs
+## 4. ISOLATE
 
-**Gate: Either confirm the hypothesis with evidence, or disprove it and go back to step 2.**
+Find the smallest reproduction or narrowest broken assumption.
 
-### 4. ISOLATE -- Find the minimal reproduction
+Gate: you can explain the bug in one precise sentence.
 
-What is the smallest change that demonstrates the bug?
-- "If I query port 5433 instead of 5432, the result is empty"
-- "If I change the config to use the production database, it works"
+## 5. FIX
 
-**Gate: You should be able to explain the bug in one sentence with specific values.**
+Apply the smallest change that addresses the root cause.
 
-### 5. FIX -- Now write the code
+Gate: the fix is targeted and traceable.
 
-You understand the root cause. You know what needs to change. Write the fix.
+## 6. REGRESS
 
-Rules:
-- One fix per commit
-- The commit message explains the root cause, not just the symptom
-- If the fix touches more than 3 files, write a plan first
+Verify:
+- the original issue is fixed
+- nearby behavior still works
+- the relevant suite is green
 
-### 6. REGRESS -- Check that nothing else broke
+Gate: the system is more understood than before, not merely quieter.
 
-- Run the test suite
-- Check the other features
-- Verify the original bug is fixed
-- Check that the fix didn't introduce new issues
+## Insight Capture
 
-**Gate: Tests pass. The user confirms the fix. The state snapshot from step 1 is now correct.**
+If the debugging cycle taught something non-obvious:
+- update the sprint `JOURNAL.md`
+- write a session journal in `docs/journals/`
+- promote to a case study or essay if the lesson is durable
 
-## Anti-Patterns
-
-| Pattern | Problem | Alternative |
-|---------|---------|-------------|
-| Fix-and-pray | Change code, rebuild, hope it works | OBSERVE first |
-| Symptom chasing | Fix the visible error without understanding why | HYPOTHESIZE the root cause |
-| Shotgun debugging | Change 5 things at once | ISOLATE to one variable |
-| Memory debugging | "I think it was working before..." | VERIFY with data |
-| Rebuild loop | Change, build (slow), test, change, build... | Check with fast validation first |
-
-## When to Escalate
-
-If after two full OHVIRF cycles the bug isn't fixed:
-1. Write a journal entry documenting what you tried
-2. Create a sprint work package for the fix
-3. Consider whether the architecture needs to change (not just the code)
+If no extra artifact is warranted, note that explicitly in the sprint journal.

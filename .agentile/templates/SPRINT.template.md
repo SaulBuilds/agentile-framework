@@ -1,31 +1,30 @@
-# Sprint <ID>: <NAME>
-
-> Copy this template to `.agentile/sprints/active/sprint-<id>-<name>/SPRINT.md`
-
 ---
+created: YYYY-MM-DDTHH:MM:SSZ
+branch: <current branch>
+author: <name or zooid>
+sprint: <sprint ID>
+status: active
+---
+
+# Sprint <ID>: <NAME>
 
 ## Sprint Metadata
 
 | Field | Value |
 |-------|-------|
-| **Sprint ID** | S-<ID> |
-| **Sprint Name** | <NAME> |
-| **Goal** | <One sentence describing the sprint's objective> |
-| **Start Date** | YYYY-MM-DD |
-| **End Date** | YYYY-MM-DD |
-| **Duration** | <N> days |
-| **Status** | NOT STARTED / IN PROGRESS / REVIEW / COMPLETE |
-
----
+| Sprint ID | S-<ID> |
+| Sprint Name | <NAME> |
+| Goal | <one sentence> |
+| Repo State | <healthy, retrofit, debugging, hardening, pre-prod> |
+| Start Date | YYYY-MM-DD |
+| End Date | YYYY-MM-DD |
+| Status | NOT STARTED / IN PROGRESS / REVIEW / COMPLETE |
 
 ## Test Baseline
 
 | Metric | Count |
 |--------|-------|
-| **Tests (start)** | <N> |
-| **Total (start)** | <N> |
-
----
+| Tests (start) | <N> |
 
 ## Work Packages
 
@@ -33,59 +32,31 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | `[ ] NOT STARTED` / `[~] IN PROGRESS` / `[x] COMPLETE` / `[!] BLOCKED` |
-| **Assignee** | <name or "unassigned"> |
-| **Estimated effort** | <S/M/L/XL> |
-| **Commit(s)** | <hash(es) when complete> |
+| Status | `[ ] NOT STARTED` / `[~] IN PROGRESS` / `[x] COMPLETE` / `[!] BLOCKED` |
+| Assignee | <name or zooid> |
+| Effort | <S/M/L/XL> |
+| Commits | <hashes when complete> |
 
-**Description:**
-<What this WP delivers and why it matters.>
+Description:
+<What this work package delivers and why it matters.>
 
-**Tasks:**
-- [ ] Task 1.1: <description>
-- [ ] Task 1.2: <description>
+Tasks:
+- [ ] <task>
+- [ ] <task>
 
-**Acceptance Criteria:**
-- [ ] <Criterion 1: specific, testable condition>
-- [ ] <Criterion 2: specific, testable condition>
+Acceptance Criteria:
+- [ ] <specific, testable condition>
+- [ ] <real data source or contract named where applicable>
 
-**Tests Added:**
-- <test name> -- <what it verifies>
-
----
-
-### WP-2: <Work Package Name>
-
-_(Copy WP block as needed for additional work packages.)_
-
----
-
-## Final Metrics
-
-| Metric | Count |
-|--------|-------|
-| **Tests (end)** | <N> |
-| **Total (end)** | <N> |
-| **Delta** | +<N> |
-
----
-
-## Dependencies
-
-| Dependency | Status | Impact if Blocked |
-|------------|--------|-------------------|
-| <dependency> | Available / Blocked | <which WPs are affected> |
-
----
+Tests Added:
+- <test and what it verifies>
 
 ## Risks
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|------------|
-| <risk> | Low/Med/High | Low/Med/High | <mitigation> |
-
----
+|------|------------|--------|------------|
+| <risk> | Low / Med / High | Low / Med / High | <mitigation> |
 
 ## Notes
 
-<Any additional context or references.>
+<extra context>

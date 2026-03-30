@@ -1,141 +1,85 @@
-# Workflow: RETROFIT -- Adopting Agentile in an Existing Codebase
+# Workflow: RETROFIT
 
-> Use this workflow when applying the agentile framework to code that was written before the framework existed.
-> The goal is to establish a test baseline, fill coverage gaps, and transition to normal workflow operations.
+Use this workflow when bringing Agentile into an existing repository or an existing slice of a repository.
 
----
+## Step 1: Install The Starter Surface
 
-## When to Use This Workflow
+Add:
+- `.agentile/`
+- root instruction files such as `AGENTS.md` and `CLAUDE.md`
+- `SPIRIT_GUIDE.md`
 
-- First time applying agentile to your repository (or a section of it).
-- Bringing a new module under agentile governance.
-- After a period of unstructured work that needs to be regularized.
+Create or update:
+- `SPIRIT.md`
+- `README.md`
+- `CHANGELOG.md` if missing
 
----
+Gate: agents and humans have a clear way in, and the repo no longer speaks like a generic starter.
 
-## Step 1: Initialize Framework
+## Step 2: Read The Actual Repo State
 
-**What to do:**
-1. Copy the `.agentile/` directory from the agentile-framework repository into your project root.
-2. Fill in `CONFIG.md` with your project's canonical values.
-3. Update `AGENT_ENTRY.md` with your project overview.
-4. Create `sprints/CURRENT.md` pointing to your first sprint.
+Inventory:
+- test status
+- CI status
+- obvious doc drift
+- sensitive paths
+- open failures or incident conditions
 
-**Verification checklist:**
-```
-.agentile/
-├── AGENT_ENTRY.md        ✓ exists, routing table current
-├── CONFIG.md             ✓ exists, values correct
-├── rules/                ✓ all rule files present
-├── workflows/            ✓ all workflow files present
-├── templates/            ✓ all template files present
-├── sprints/
-│   ├── CURRENT.md        ✓ exists, points to active sprint
-│   ├── active/           ✓ exists
-│   ├── backlog/          ✓ exists
-│   └── completed/        ✓ exists
-├── coverage/             ✓ exists
-├── audits/               ✓ exists
-└── formal/               ✓ exists
-```
+Gate: you know whether this is a healthy retrofit or an unstable one.
 
-**GATE:** All framework files exist and are populated. DO NOT PROCEED with missing framework infrastructure.
+## Step 3: If The Repo Is Unstable, Review Before You Build
 
----
+If CI is red, review feedback is piling up, or the repo is in pre-prod hardening:
 
-## Step 2: Audit Existing Tests
+1. run `REVIEW.md`
+2. run `DEBUGGING.md`
+3. create work packages for the discovered fixes
 
-**What to do:**
-1. Run the full test suite and record results.
-2. Count total tests, passing, failing, and ignored.
-3. Identify untested modules (modules with zero or very few tests).
-4. Identify flaky tests (tests that pass/fail inconsistently).
+Gate: do not start new features on top of an unknown state.
 
-**Output:** A test audit summary documenting:
-- Total test count per module
-- Failing tests (with failure reasons)
-- Ignored tests (with ignore reasons)
-- Modules with very few tests (coverage gaps)
+## Step 4: Create The Baseline
 
-**GATE:** You have a complete inventory of the test landscape. Every failing test is documented with its failure reason. DO NOT PROCEED without knowing the current state.
+Run the test suite and record:
+- total passing tests
+- failing tests
+- ignored or flaky tests
+- obvious untested high-risk areas
 
----
+Write the baseline in `coverage/BASELINE.md`.
 
-## Step 3: Create Coverage Baseline
+Gate: the current quality floor is explicit.
 
-**What to do:**
-1. Record the current passing test count in `coverage/BASELINE.md`.
-2. This baseline is the floor. The test count must never drop below this number (Rule 3).
+## Step 5: Create The Retrofit Sprint
 
-**GATE:** `coverage/BASELINE.md` exists with dated, accurate numbers. DO NOT PROCEED without a recorded baseline.
+Create a sprint that covers:
+- spirit and README alignment
+- baseline capture
+- red CI or review fallout if present
+- first hardening or adoption tasks
 
----
+Use the normal sprint scaffold with `SPRINT.md`, `DAILY.md`, `JOURNAL.md`, and `REPORT.md`.
 
-## Step 4: Fix Failing Tests
+Gate: retrofit work is tracked like all other work.
 
-**What to do:**
-1. Fix all currently failing tests. For each:
-   - If the test is correct and the code is wrong: fix the code.
-   - If the test is outdated and the code is correct: update the test.
-   - If the test is flaky: make it deterministic or mark it as ignored with a documented reason and a backlog item to fix it.
-2. Run tests until all pass (or all failures are documented as ignored with backlog items).
+## Step 6: Stabilize Before Normal Feature Work
 
-**GATE:** All tests pass. All ignored tests have documented reasons. DO NOT PROCEED with red tests.
+Prioritize:
+- failing tests
+- broken CI
+- untracked risky code
+- missing docs for critical paths
 
----
+Leave lower-risk cleanup for later sprints.
 
-## Step 5: Wrap Untested Code
+Gate: high-risk uncertainty is reduced before the repo returns to normal planned delivery.
 
-**What to do:**
-1. For each module with very few tests, create a retrofit sprint WP to add tests.
-2. Prioritize by risk:
-   - **High risk (test immediately):** Security-critical, financial logic, consensus
-   - **Medium risk (test this sprint):** API, networking, data processing
-   - **Low risk (test next sprint):** CLI, documentation tooling, scripts
-3. Write tests following TDD rules.
+## Step 7: Transition To Standard Workflow
 
-**Output:** Sprint WPs for test gap coverage, prioritized by risk.
+Once the repo has:
+- a real `SPIRIT.md`
+- a real project README
+- a recorded test baseline
+- an active sprint
+- stable enough review/debug state
 
-**GATE:** High-risk modules have tests covering their core public API. DO NOT PROCEED to normal feature work while high-risk code is untested.
-
----
-
-## Step 6: Transition to Normal Workflow
-
-**What to do:**
-1. Mark the retrofit sprint as complete.
-2. Verify the test ratchet: final count > baseline count.
-3. Update `sprints/CURRENT.md` to point to a normal feature sprint.
-4. From this point forward, follow the standard SPRINT and FEATURE workflows.
-
-**GATE:** Retrofit sprint is archived. Test count has increased. Normal workflow is in effect. The codebase is under agentile governance.
-
----
-
-## Flowchart
-
-```
-Initialize Framework
-    │
-    └── GATE: All framework files exist
-        │
-        Audit Existing Tests
-        │
-        └── GATE: Complete test inventory
-            │
-            Create Coverage Baseline
-            │
-            └── GATE: Baseline recorded
-                │
-                Fix Failing Tests
-                │
-                └── GATE: All tests pass
-                    │
-                    Wrap Untested Code
-                    │
-                    └── GATE: High-risk code covered
-                        │
-                        Transition to Normal Workflow
-                        │
-                        └── GATE: Retrofit complete, normal sprint active
-```
+move into the normal `SPRINT.md` and `FEATURE.md` cycle.

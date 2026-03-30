@@ -13,6 +13,7 @@
 
 **Verification:**
 - The first action in any session log is reading `AGENT_ENTRY.md`.
+- If `SPIRIT.md` or the root `README.md` are missing, stale, or still describe the starter, the contributor routes through the bootstrap guidance before feature work.
 - CONFIG.md constants are referenced correctly in all produced artifacts.
 
 **On violation:** **BLOCKER.** All work produced without reading AGENT_ENTRY.md is suspect and must be re-reviewed from scratch.
@@ -120,13 +121,15 @@ An AI agent will create types named `StubXxxBackend` and rationalize them as "fo
 
 ## Rule 7: Documentation Updates Accompany Code Changes
 
-**Statement:** Code changes that affect public APIs, configuration, architecture, or user-facing behavior must include corresponding documentation updates in the same PR.
+**Statement:** Code changes that affect public APIs, configuration, architecture, user-facing behavior, or project governance must include corresponding documentation updates in the same PR.
 
 **Why:** Documentation that lags behind code is worse than no documentation -- it actively misleads. Keeping docs and code in the same commit ensures they stay synchronized.
 
 **Verification:**
 - PRs that touch public interfaces, config files, or CLI arguments include doc updates.
 - Module READMEs reflect current API surface.
+- The root `README.md` reflects the actual project rather than starter boilerplate.
+- Changes to collaboration norms or governance update `SPIRIT.md`.
 - CHANGELOG has an entry for user-facing changes.
 
 **On violation:** **GATE.** PR will not merge until documentation is updated. Reviewers check for doc changes alongside code changes.
@@ -155,9 +158,10 @@ An AI agent will create types named `StubXxxBackend` and rationalize them as "fo
 **Why:** Agents have no persistent memory across sessions. Humans forget. Chat logs are unsearchable and ephemeral. The sprint file is the only artifact that survives and is accessible to all future contributors.
 
 **Verification:**
-- Sprint status is updated in `SPRINT.md` after every work session.
-- `DAILY.md` entries exist for each active work day.
-- Completed sprints have a `REPORT.md` and `RETRO.md`.
+- Sprint status is updated in `SPRINT.md` as work moves.
+- `DAILY.md` entries exist for active work sessions.
+- Completed sprints have a `JOURNAL.md` and `REPORT.md`.
+- If a sprint produced a novel fix or interpretation, the journal captures it directly or links to a promoted essay or case study.
 
 **On violation:** **GATE.** Work that is not recorded in the sprint file did not happen. Update the file before claiming completion.
 
@@ -205,11 +209,11 @@ If the data source does not exist yet, implement it FIRST. If it cannot be imple
 
 ---
 
-## Rule 12: All Documentation Must Have Timestamps and Branch Context
+## Rule 12: Project-Generated Governance Docs Must Have Timestamps and Branch Context
 
-**Statement:** Every document created or updated in this repository -- journals, essays, case studies, sprint files, ADRs, specs -- MUST include a frontmatter block with creation timestamp, branch, and author. Updates append a changelog entry rather than modifying the timestamp.
+**Statement:** Project-generated governance documents in this repository -- `SPIRIT.md`, sprint files, journals, essays, case studies, ADRs, specs, and similar records -- MUST include a frontmatter block with creation timestamp, branch, and author. Updates append a changelog entry rather than modifying the timestamp.
 
-**Why:** Without timestamps and branch context, documents from different phases of development are indistinguishable. This causes agents and humans to act on stale information, repeat solved problems, and build on deprecated architecture. Branch context tells you whether the document applies to the current work or is historical.
+**Why:** Without timestamps and branch context, project records from different phases of development are indistinguishable. This causes agents and humans to act on stale information, repeat solved problems, and build on deprecated architecture. Branch context tells you whether the document applies to the current work or is historical.
 
 **Required frontmatter format:**
 
@@ -230,11 +234,12 @@ superseded_by: <path to replacement doc, if status=superseded>
 3. **Sprint files** include the sprint ID and branch in frontmatter.
 4. **ADRs and specs** include status field. When an ADR is superseded, update status to `superseded` and add `superseded_by` pointer.
 5. **Essays and case studies** include the branch they were written on -- this determines whether conclusions still apply.
-6. **When updating an existing document**, do NOT change the `created` timestamp. Instead, add a `## Changelog` section at the bottom with the update date and what changed.
-7. **Documents without frontmatter are pre-rule artifacts** -- they are treated as historical context, not current guidance.
+6. **Starter bootstrap files** such as `README.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, and templates may remain frontmatter-free for tool compatibility and ease of adoption.
+7. **When updating an existing governed document**, do NOT change the `created` timestamp. Instead, add a `## Changelog` section at the bottom with the update date and what changed.
+8. **Documents without required frontmatter are incomplete** unless they are explicitly treated as bootstrap artifacts or historical pre-rule context.
 
 **Verification:**
-- New documents have the frontmatter block as the first content.
+- New governed documents have the frontmatter block as the first content.
 - Branch field matches the branch the document was committed on.
 
 **On violation:** **GATE.** Document is incomplete until frontmatter is added. Existing pre-rule documents are exempt but should be updated when touched.
@@ -257,4 +262,4 @@ superseded_by: <path to replacement doc, if status=superseded>
 | 9 | Sprint file is source of truth | GATE |
 | 10 | Formal verification for critical logic | GATE |
 | 11 | Mock budget = 0, data source tracing | GATE |
-| 12 | All docs must have timestamps + branch context | GATE |
+| 12 | Governed docs must have timestamps + branch context | GATE |

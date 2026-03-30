@@ -1,0 +1,10 @@
+Before writing code:
+
+1. Read `SPIRIT.md`. If it is missing or still describes the starter instead of the real project, create or rewrite it from `SPIRIT_GUIDE.md`.
+2. Read `.agentile/AGENT_ENTRY.md`.
+3. Read `.agentile/CONFIG.md` and `.agentile/rules/CORE_RULES.md`.
+4. Read `.agentile/sprints/CURRENT.md`.
+5. If the repo is in failing CI, review fallout, or pre-prod debugging, route through `.agentile/workflows/REVIEW.md` and `.agentile/workflows/DEBUGGING.md` before feature work.
+6. If `README.md` still describes the starter rather than the actual project, refactor it before feature work.
+
+Do not write code until those steps are complete.

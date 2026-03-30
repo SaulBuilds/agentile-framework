@@ -1,53 +1,36 @@
 ## Summary
 
-<!-- 1-3 bullet points describing what this PR does and why -->
-
--
--
+- <what changed>
+- <why it changed>
 
 ## Sprint Reference
 
-- **Sprint:** S-<ID>
-- **Work Package:** WP-<N>
-
-## Changes
-
-### `<module-name>`
-- <change description>
+- Sprint: S-<ID> or N/A
+- Work Package: WP-<N> or N/A
 
 ## Test Plan
 
-- [ ] Unit tests added/updated: `<test names>`
-- [ ] Full test suite passes
-- [ ] Linter clean
-- [ ] Formatted
-
-### Test Count
-
-| Suite | Before | After | Delta |
-|-------|--------|-------|-------|
-| Tests | <N> | <N> | +<N> |
+- [ ] Relevant tests added or updated
+- [ ] Required suite passes
+- [ ] Linter / typecheck clean
+- [ ] Formatting clean
 
 ## Documentation
 
-- [ ] Module README updated (if API changed)
-- [ ] CHANGELOG entry added (if user-facing change)
-- [ ] Doc comments on new public items
-- [ ] N/A -- no documentation changes needed
+- [ ] Root README updated if project-facing behavior changed
+- [ ] Root SPIRIT updated if governance or collaboration norms changed
+- [ ] Module docs updated if API changed
+- [ ] CHANGELOG updated if user-facing behavior changed
+- [ ] No documentation update was needed
 
-## Security Considerations
+## Insight Capture
 
-- [ ] This PR does NOT touch security-sensitive code
-- [ ] This PR touches security-sensitive code and requires review
+- [ ] Sprint DAILY.md updated
+- [ ] Sprint JOURNAL.md updated or queued
+- [ ] Durable lesson promoted to journal, essay, or case study
+- [ ] No additional insight artifact was warranted
 
-## Formal Verification
+## Security / Governance
 
-- [ ] N/A -- no critical logic changes
-- [ ] TLA+ spec updated and TLC passes
-
-## Checklist
-
-- [ ] Conventional commit messages used
-- [ ] No TODOs, FIXMEs, or stubs in new code
-- [ ] No hardcoded secrets or credentials
-- [ ] Co-Authored-By footer included (if AI-assisted)
+- [ ] No sensitive governance paths changed
+- [ ] Sensitive governance paths changed and required review was obtained

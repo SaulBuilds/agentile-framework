@@ -1,110 +1,105 @@
 # Agent Entry Point
 
-> **Read this file first.** Every contributor -- human or AI -- starts here.
+Read this file first. Every contributor, human or agent, starts here.
 
-## Who Are You?
+## First Routing Decision
 
-| If you are... | Go to... |
-|---------------|----------|
-| **A new contributor (human or AI)** | [Onboarding Quiz](#onboarding) below |
-| **A qualified engineer (no AI assist)** | [Skip Protocol](onboarding/SKIP_PROTOCOL.md) |
-| **An autonomous agent entering cold** | [Cold Start](#cold-start) below |
-| **Returning to an active sprint** | [sprints/CURRENT.md](sprints/CURRENT.md) |
+| If you are entering a repo that is... | Go to... |
+|---------------------------------------|----------|
+| Missing a real `SPIRIT.md` or still using the starter README | [Bootstrap The Repo Contract](#bootstrap-the-repo-contract) |
+| Healthy and you are starting cold | [Cold Start](#cold-start) |
+| Already running an active sprint | [`sprints/CURRENT.md`](sprints/CURRENT.md) |
+| In failing CI, review fallout, debugging, or pre-prod hardening | [`workflows/REVIEW.md`](workflows/REVIEW.md) then [`workflows/DEBUGGING.md`](workflows/DEBUGGING.md) |
+| New contributor needing role assignment | [Onboarding](#onboarding) |
 
----
+## Bootstrap The Repo Contract
+
+Before feature work, make sure the repo actually speaks for itself.
+
+1. Read [`../SPIRIT.md`](../SPIRIT.md) if it exists.
+2. If `SPIRIT.md` is missing, stale, or still describes the starter, rewrite it using [`../SPIRIT_GUIDE.md`](../SPIRIT_GUIDE.md) and [`templates/SPIRIT.template.md`](templates/SPIRIT.template.md).
+3. If [`../README.md`](../README.md) still describes the starter rather than the actual project, refactor it before feature work.
+4. Confirm the root instruction files still route agents into this framework: [`../AGENTS.md`](../AGENTS.md), [`../CLAUDE.md`](../CLAUDE.md), and related tool files.
+5. If the repo has no `CHANGELOG.md`, create one from [`templates/CHANGELOG.template.md`](templates/CHANGELOG.template.md).
+
+GATE: Do not treat starter boilerplate as project truth. If the repo still describes the framework instead of the project, fix that first or create a sprint item that does.
 
 ## Cold Start
 
-If you have no prior context about this project:
+If you have no useful context about this repository:
 
-1. **Read** [CONFIG.md](CONFIG.md) -- canonical project constants
-2. **Read** [rules/CORE_RULES.md](rules/CORE_RULES.md) -- non-negotiable operating rules
-3. **Check** [sprints/CURRENT.md](sprints/CURRENT.md) -- what work is active right now
-4. **Check** [sprints/backlog/](sprints/backlog/) -- what needs to be done
-5. **Pick a task** from the current sprint or backlog
-6. **Follow** the [FEATURE workflow](workflows/FEATURE.md) for implementation
+1. Read [`../SPIRIT.md`](../SPIRIT.md) if it exists. If it does not, return to [Bootstrap The Repo Contract](#bootstrap-the-repo-contract).
+2. Read [`CONFIG.md`](CONFIG.md) for canonical project constants.
+3. Read [`rules/CORE_RULES.md`](rules/CORE_RULES.md) for the hard gates.
+4. Read [`sprints/CURRENT.md`](sprints/CURRENT.md) for the active state.
+5. Decide which workflow matches the repo state:
+   - Healthy planned work: [`workflows/FEATURE.md`](workflows/FEATURE.md)
+   - New project setup: [`workflows/INIT.md`](workflows/INIT.md)
+   - Existing repo adoption: [`workflows/RETROFIT.md`](workflows/RETROFIT.md)
+   - Review or hardening: [`workflows/REVIEW.md`](workflows/REVIEW.md)
+   - Debugging or failing CI: [`workflows/DEBUGGING.md`](workflows/DEBUGGING.md)
 
-**GATE: Do NOT write code until you have read CONFIG.md and CORE_RULES.md.**
-
----
+GATE: Do not write code until you can explain the project, the current repo state, the active sprint state, and the rules that apply to your next move.
 
 ## Onboarding
 
-New contributors take a 5-question adaptive quiz to determine:
-- Your **skill tier** (Novice, Journeyman, Expert, Master)
-- Your **starting zooid** (role assignment)
-- Your **ELO starting score**
+New contributors take the adaptive quiz in [`onboarding/QUIZ_SPEC.md`](onboarding/QUIZ_SPEC.md) unless the skip protocol applies.
 
-See [onboarding/QUIZ_SPEC.md](onboarding/QUIZ_SPEC.md) for the full quiz.
+Use:
+- [`onboarding/QUIZ_SPEC.md`](onboarding/QUIZ_SPEC.md)
+- [`onboarding/SKIP_PROTOCOL.md`](onboarding/SKIP_PROTOCOL.md)
 
-After the quiz, you will be directed to the appropriate workflow:
-- **Novice (0-800)**: Start with documentation tasks and guided feature work
-- **Journeyman (800-1200)**: Standard feature workflow with review gates
-- **Expert (1200-1600)**: Feature workflow with relaxed gates, can review others
-- **Master (1600+)**: Can propose architecture changes, mentor novices
+The quiz or skip protocol determines:
+- starting tier
+- starting zooid
+- initial ELO score
 
----
+## Golden Moves
+
+Before any meaningful work:
+
+1. Confirm the repo has a project-specific `SPIRIT.md`.
+2. Confirm the root `README.md` describes the project rather than the starter.
+3. Read `CONFIG.md`, `CORE_RULES.md`, and `CURRENT.md`.
+4. Choose the workflow that matches the repo state.
+5. Record work in sprint and journal artifacts so the next contributor inherits context instead of guesses.
 
 ## Project Overview
 
-Fill in your project details here. See [CONFIG.md](CONFIG.md) for canonical values.
+Use the root [`../README.md`](../README.md) for the project description.
 
----
+Use [`CONFIG.md`](CONFIG.md) for:
+- canonical names
+- commands
+- workspace map
+- critical paths and sensitive areas
+
+Use [`../SPIRIT.md`](../SPIRIT.md) for:
+- collaboration norms
+- non-negotiables specific to this project
+- how the spirit itself may be changed
 
 ## Framework Structure
 
-```
+```text
 .agentile/
-├── AGENT_ENTRY.md          # You are here
-├── CONFIG.md               # Canonical project constants
-├── MANIFEST.md             # Index of all framework files
-├── rules/                  # Non-negotiable operating rules
-├── zooids/                 # Contributor identities + ELO system
-├── onboarding/             # Skill assessment quiz
-├── workflows/              # Step-by-step execution procedures
-├── templates/              # Copyable document templates
-├── docs/                   # Living documentation + canonical essays
-├── formal/                 # Formal verification specs + workflow
-├── coverage/               # Test coverage tracking + gates
-├── sprints/                # active/, backlog/, completed/
-└── audits/                 # Dated audit reports (immutable)
+├── AGENT_ENTRY.md
+├── CONFIG.md
+├── MANIFEST.md
+├── rules/
+├── workflows/
+├── templates/
+├── docs/
+├── formal/
+├── coverage/
+├── sprints/
+└── audits/
 ```
 
----
+## Timestamp Requirement
 
-## The Golden Rules
+Project-generated governance artifacts such as `SPIRIT.md`, sprint records, journals, essays, case studies, ADRs, and specs should use timestamp + branch frontmatter.
 
-1. **Plan before you code** -- check CURRENT.md, follow the workflow
-2. **No stubs, no TODOs** -- every line is production-ready
-3. **Test count only goes up** -- never decrease the test count
-4. **Audits are immutable** -- dated directories, never edited after creation
-5. **The sprint file is the source of truth** -- not your memory, not a chat log
-6. **Every document has a timestamp and branch** -- no undated artifacts (Rule 12)
+Starter bootstrap files such as `README.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, and templates may stay frontmatter-free so tools discover and render them cleanly.
 
-For the full rule set, see [rules/CORE_RULES.md](rules/CORE_RULES.md).
-
----
-
-## Document Timestamp Requirement (Rule 12)
-
-**Every document you create** -- journal, essay, case study, ADR, sprint file, spec -- MUST have this frontmatter:
-
-```markdown
----
-created: YYYY-MM-DDTHH:MM:SSZ
-branch: <current git branch>
-author: <your name or zooid>
-sprint: <sprint ID if applicable>
-status: active | superseded | archived
----
-```
-
-Documents without this frontmatter are pre-rule artifacts from earlier branches and should be treated as **historical context only**, not current guidance. When in doubt about whether a document reflects current state, check its `branch` and `status` fields.
-
-See [rules/CORE_RULES.md](rules/CORE_RULES.md) Rule 12 for the full specification.
-
----
-
-## Single Source of Truth
-
-Define your product specification and link it here. All sprint work traces back to this spec. If it is not in the spec, it is not in scope.
+See [`rules/CORE_RULES.md`](rules/CORE_RULES.md) Rule 12 for the full standard.

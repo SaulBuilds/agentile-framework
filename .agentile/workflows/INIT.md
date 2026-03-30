@@ -1,146 +1,79 @@
-# Workflow: INIT -- Cold Start
+# Workflow: INIT
 
-> Follow this workflow when entering the project with no prior context.
-> Every step has a gate. Do not skip steps.
+Use this workflow when entering a healthy repo cold and establishing the project contract before normal sprint work.
 
----
+## Step 1: Bootstrap The Repo Contract
 
-## Step 1: Read AGENT_ENTRY.md
+1. Read `../SPIRIT.md` if it exists.
+2. If `SPIRIT.md` is missing or generic, create or rewrite it from `../SPIRIT_GUIDE.md`.
+3. Refactor `../README.md` if it still describes the starter rather than the actual project.
+4. Ensure the root instruction files point agents into `.agentile/AGENT_ENTRY.md`.
+5. Ensure `CHANGELOG.md` exists.
 
-Read `.agentile/AGENT_ENTRY.md` to understand the project identity, framework structure, and routing table.
+Gate: the repo should describe itself, not the framework starter.
 
-**Output:** You know what the project is, what it does, and where to find everything.
+## Step 2: Read The Canon
 
-**GATE:** You can describe the project in one sentence and name its primary components. If not, re-read. DO NOT PROCEED.
+Read:
+- `AGENT_ENTRY.md`
+- `CONFIG.md`
+- `rules/CORE_RULES.md`
+- `sprints/CURRENT.md`
 
----
+Gate: you can explain the project, the current repo state, the hard rules, and the active sprint situation.
 
-## Step 2: Onboarding Quiz (or Skip Protocol)
+## Step 3: Onboarding Or Skip
 
-If you are a new contributor, take the quiz at `onboarding/QUIZ_SPEC.md` to determine your skill tier and starting role.
+Take the quiz or use the skip protocol:
+- `onboarding/QUIZ_SPEC.md`
+- `onboarding/SKIP_PROTOCOL.md`
 
-If you are a returning contributor or autonomous agent with demonstrated project knowledge, follow the skip protocol at `onboarding/SKIP_PROTOCOL.md`.
+Gate: you know your tier and role boundaries.
 
-**Output:** You have a skill tier (Novice/Journeyman/Expert/Master) and know your role boundaries.
+## Step 4: Choose The Repo-State Path
 
-**GATE:** You have either completed the quiz or executed the skip protocol. DO NOT PROCEED without a tier assignment.
+Pick the next workflow based on reality:
 
----
+| Repo State | Next Workflow |
+|------------|---------------|
+| Healthy and planned | `SPRINT.md` then `FEATURE.md` |
+| Existing repo adoption | `RETROFIT.md` |
+| Failing CI, review fallout, or debugging | `REVIEW.md` then `DEBUGGING.md` |
 
-## Step 3: Read CONFIG.md
+Gate: do not treat debugging or hardening as ordinary greenfield feature work.
 
-Read `.agentile/CONFIG.md` for canonical project constants:
-- Project identity and naming conventions
-- Technology stack
-- Workspace layout
-- Build and test commands
+## Step 5: Create The First Sprint Scaffold
 
-**Output:** You know the canonical values and will use them correctly in all code and documentation.
+Create:
 
-**GATE:** You can list the core modules and their paths. You know how to run tests. DO NOT PROCEED without this knowledge.
-
----
-
-## Step 4: Read CORE_RULES.md
-
-Read `.agentile/rules/CORE_RULES.md` for the 13 non-negotiable rules.
-
-Key rules to internalize:
-- No mocks, stubs, or TODOs (Rule 2)
-- Test count only increases (Rule 3)
-- All code must pass linting clean (Rule 5)
-- Sprint file is source of truth (Rule 9)
-
-**Output:** You understand the operating constraints.
-
-**GATE:** You accept and will follow all 13 rules. If any rule is unclear, read it again. DO NOT PROCEED with ambiguity about the rules.
-
----
-
-## Step 5: Check sprints/CURRENT.md
-
-Read `.agentile/sprints/CURRENT.md` to understand:
-- Which sprint is active
-- What work packages exist
-- What is complete, in progress, or blocked
-
-**Output:** You know the current state of the project and what work is happening.
-
-**GATE:** You can describe the active sprint's goal and list its work packages. DO NOT PROCEED if you do not know what sprint is active.
-
----
-
-## Step 6: Pick a Task
-
-Choose a task from one of these sources (in priority order):
-
-1. **Active sprint** -- unstarted or in-progress work packages in the current sprint's `SPRINT.md`
-2. **Backlog** -- prioritized items in `sprints/backlog/`
-3. **Known issues** -- bugs or regressions identified in previous sprint retros
-
-**Output:** You have a specific task with a WP identifier.
-
-**GATE:** Your task is recorded in a sprint file. If it is not, create the sprint entry first (see `SPRINT.md` workflow). DO NOT PROCEED with untracked work (Rule 4).
-
----
-
-## Step 7: Follow the Appropriate Workflow
-
-| Task Type | Workflow |
-|-----------|----------|
-| New feature | [FEATURE.md](FEATURE.md) |
-| Bug fix | [FEATURE.md](FEATURE.md) (same cycle, simpler spec) |
-| Sprint planning | [SPRINT.md](SPRINT.md) |
-| Adopting agentile in new area | [RETROFIT.md](RETROFIT.md) |
-| Quality review | [REVIEW.md](REVIEW.md) |
-| Debugging | [DEBUGGING.md](DEBUGGING.md) |
-
-**Output:** You are executing a defined workflow with clear gates.
-
-**GATE:** You are following a documented workflow. Ad-hoc coding without a workflow is prohibited. DO NOT PROCEED without selecting a workflow.
-
----
-
-## Step 8: Report Results
-
-After completing your task:
-
-1. Update the sprint `SPRINT.md` with the task status (complete/blocked/in-progress).
-2. Update `DAILY.md` with what was done, test counts, and any blockers.
-3. If the sprint is complete, write a `REPORT.md` and `RETRO.md`.
-
-**Output:** The sprint file reflects reality. Future contributors can pick up where you left off.
-
-**GATE:** Your work is recorded. Unrecorded work did not happen (Rule 9).
-
----
-
-## Flowchart
-
+```text
+.agentile/sprints/active/sprint-<id>-<name>/
+├── SPRINT.md
+├── DAILY.md
+├── JOURNAL.md
+└── REPORT.md
 ```
-START
-  │
-  ├── Read AGENT_ENTRY.md
-  │     └── GATE: Know project identity
-  │
-  ├── Onboarding / Skip Protocol
-  │     └── GATE: Have tier assignment
-  │
-  ├── Read CONFIG.md
-  │     └── GATE: Know canonical values
-  │
-  ├── Read CORE_RULES.md
-  │     └── GATE: Accept all rules
-  │
-  ├── Check CURRENT.md
-  │     └── GATE: Know active sprint
-  │
-  ├── Pick task
-  │     └── GATE: Task is tracked in sprint
-  │
-  ├── Execute workflow
-  │     └── GATE: Following a documented workflow
-  │
-  └── Report results
-        └── GATE: Sprint file updated
-```
+
+Use:
+- `templates/SPRINT.template.md`
+- `templates/DAILY.template.md`
+- `templates/JOURNAL.template.md`
+- `templates/REPORT.template.md`
+
+Update `sprints/CURRENT.md` to point to the sprint.
+
+Gate: no untracked work.
+
+## Step 6: Record The Test Baseline
+
+Run the relevant test suite and record the result in:
+- `coverage/BASELINE.md`
+- the sprint `SPRINT.md`
+
+Gate: the test ratchet has a real starting number.
+
+## Step 7: Start The Right Workflow
+
+From here, work should happen through the selected workflow and be reported back into sprint artifacts and journals.
+
+Gate: if work is not reflected in sprint records, it did not happen.

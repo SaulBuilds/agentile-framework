@@ -1,32 +1,29 @@
-# Sprint Report: S-<ID> -- <NAME>
-
-> Generated at sprint close. This document is immutable after archiving.
-
 ---
+created: YYYY-MM-DDTHH:MM:SSZ
+branch: <current branch>
+author: <name or zooid>
+sprint: <sprint ID>
+status: active
+---
+
+# Sprint Report: S-<ID> -- <NAME>
 
 ## Summary
 
 | Field | Value |
 |-------|-------|
-| **Sprint ID** | S-<ID> |
-| **Sprint Name** | <NAME> |
-| **Goal** | <Sprint goal> |
-| **Start Date** | YYYY-MM-DD |
-| **End Date** | YYYY-MM-DD |
-| **Outcome** | ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED |
-
----
+| Sprint ID | S-<ID> |
+| Sprint Name | <NAME> |
+| Goal | <goal> |
+| Outcome | ACHIEVED / PARTIALLY ACHIEVED / NOT ACHIEVED |
+| Start Date | YYYY-MM-DD |
+| End Date | YYYY-MM-DD |
 
 ## Work Package Results
 
 | WP | Name | Status | Tests Added | Commits |
 |----|------|--------|-------------|---------|
-| WP-1 | <name> | COMPLETE / BLOCKED | +<N> | `<hash>` |
-
-### Completed: <N> / <total>
-### Blocked: <N> (moved to backlog)
-
----
+| WP-1 | <name> | COMPLETE / BLOCKED | +<N> | <hash> |
 
 ## Test Metrics
 
@@ -34,32 +31,21 @@
 |--------|----------|-------|-------|
 | Tests | <N> | <N> | +<N> |
 
-Test ratchet: **PASSED** / **FAILED**
+Test ratchet: PASSED / FAILED
 
----
+## Documentation And Governance
 
-## Retrospective
+- README: <updated / unchanged>
+- SPIRIT: <updated / unchanged>
+- CHANGELOG: <updated / unchanged>
 
-### What Went Well
-- <Item>
+## Insight Artifacts
 
-### What Went Poorly
-- <Item>
+- Journal: <path>
+- Session journals: <paths or none>
+- Essays: <paths or none>
+- Case studies: <paths or none>
 
-### What to Change
-- <Action item> (assigned to: <name/backlog>)
+## Carry-Forward
 
-### Velocity Notes
-- Planned WPs: <N>
-- Completed WPs: <N>
-- Velocity: <percentage>%
-
----
-
-## Next Sprint
-
-| Field | Value |
-|-------|-------|
-| **Sprint ID** | S-<next> |
-| **Proposed Goal** | <goal> |
-| **Carried Over** | WP-<N> |
+- <backlog or next sprint item>

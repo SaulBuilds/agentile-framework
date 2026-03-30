@@ -1,0 +1,8 @@
+# Require explicit approval for spirit and governance changes.
+# Replace the example owners with your actual people or teams.
+
+/SPIRIT.md @team/maintainers @team/governance
+/SPIRIT_GUIDE.md @team/maintainers @team/governance
+/.agentile/AGENT_ENTRY.md @team/maintainers @team/governance
+/.agentile/rules/ @team/maintainers @team/governance
+/.agentile/workflows/ @team/maintainers @team/governance

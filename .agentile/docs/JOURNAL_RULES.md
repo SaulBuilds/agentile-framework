@@ -1,88 +1,101 @@
-# Agentile Journaling & Introspection Rules
+# Journaling Rules
 
-## Purpose
+Journals are not optional mood boards. They are the project's reflective memory.
 
-Sprint journals are the institutional memory of a project. They capture what the numbers cannot: why decisions were made, what surprised the team, what technical debt was created, and what the honest state of the work is.
+Daily logs record activity. Journals record interpretation.
 
-Code tells you WHAT was built. Tests tell you IF it works.
-Journals tell you WHY it matters and WHERE it is fragile.
+## Rule 1: Every Sprint Gets A `JOURNAL.md`
 
-## Rule 1: Every Sprint Gets a Journal
+Each sprint directory should contain:
+- `SPRINT.md`
+- `DAILY.md`
+- `JOURNAL.md`
+- `REPORT.md`
 
-**Trigger:** The last WP of a sprint is committed.
-**Action:** STOP. Write a journal BEFORE starting the next sprint.
-**Gate:** The journal commit must exist between the last WP commit and the first commit of the next sprint.
+`JOURNAL.md` is the sprint retrospective and introspective log. It should exist before the sprint is archived.
 
-## Rule 2: Ask the User for Angle
+Gate: a sprint is not complete until its journal exists.
 
-Before writing, ask:
-- "Sprint X is complete. What angle do you want in the journal?"
-- "Any hiccups or themes to cover?"
-- "Anything that felt off while watching the build?"
+## Rule 2: Reviews And Debugging Can Trigger Extra Journals
 
-The user's perspective is the journal's most valuable input.
+Write a session journal in `.agentile/docs/journals/` when:
+- a review changes the direction of the work
+- failing CI exposes a hidden assumption
+- a debugging cycle produces a non-obvious root cause
+- a handoff would otherwise lose important context
 
-## Rule 3: Required Sections
+If the sprint journal is enough, link to it. If not, create a dedicated session journal.
 
-Every sprint journal MUST contain:
+## Rule 3: Promote Durable Lessons
 
-### What Was Delivered
-- Table of WPs with lines added, tests, commit hashes
-- Total metrics (lines, tests, files)
+Promote an insight when it clearly outlives the immediate sprint:
 
-### What's Wrong (Honest Assessment)
-- Technical debt created or carried forward
-- Missing tests, mock data, unconnected wiring
-- Architectural problems exposed
-- Commit hygiene issues
+- write an essay when the lesson generalizes into a principle
+- write a case study when the incident details matter as much as the conclusion
 
-### What I Learned
-- Surprising outcomes (positive or negative)
-- Patterns that worked well
-- Patterns that should be avoided
+See [`INSIGHT_CAPTURE.md`](INSIGHT_CAPTURE.md) for the decision logic.
 
-### What's Next
-- Preview of next sprint's WPs
-- Proposed additions based on this retro
-- Open questions for the user
+## Rule 4: Required Sections
 
-### Timestamp
-- UTC timestamp
-- Branch name
-- Key commit hashes
+Every meaningful journal should answer:
 
-## Rule 4: Be Direct About Problems
+1. What happened
+2. What I thought was true
+3. What was actually true
+4. What evidence changed my mind
+5. What fix, interpretation, or decision followed
+6. What still feels fragile
+7. What the next contributor should do
 
-Do NOT:
-- Bury issues in positive language
-- Say "minor issue" when it is a real gap
-- Skip mentioning fragile code
-- Pretend mock data is real data
+Use [`../templates/JOURNAL.template.md`](../templates/JOURNAL.template.md) as the default shape.
 
-DO:
-- State the problem clearly
-- Quantify it (how many files, how many missing tests)
-- Propose the fix with effort estimate
-- Let the user prioritize
+## Rule 5: Be Intellectually Honest
 
-## Rule 5: The Bug-to-Feature Question
+Do not:
+- smooth over fragility with upbeat language
+- hide uncertainty behind passive voice
+- present guesses as facts
+- omit the human or reviewer input that changed the outcome
 
-For every problem identified, ask: "Is this a bug that could become a feature?" Technical debt often reveals architectural opportunities.
+Do:
+- state the mistaken belief plainly
+- cite the evidence that corrected it
+- separate what is proven from what is inferred
+- name remaining uncertainty and next verification steps
 
-## Rule 6: Configurable by Project
+## Rule 6: Ask For Human Angle When Available, Auto-Write When Not
 
-Projects using Agentile can adjust these rules:
+Human context is valuable, but it should not block the journal.
 
-| Setting | Default | Options |
-|---------|---------|---------|
-| journal_frequency | every_sprint | every_sprint, every_week, every_milestone |
-| required_sections | all 5 | any subset |
-| ask_user_angle | true | true, false (auto-write) |
-| honesty_level | direct | direct, diplomatic, minimal |
-| timestamp_format | UTC ISO 8601 | any |
-| journal_location | .agentile/docs/journals/ | configurable path |
-| naming_convention | YYYY-MM-DD_TITLE.md | configurable |
+If a human counterpart is available, ask for angle or emphasis.
+
+If not, write the journal anyway. A missing angle is not a waiver.
+
+## Rule 7: Keep The Ladder Light
+
+The default bias is:
+- short journal first
+- essay only if the lesson generalizes
+- case study only if the concrete incident teaches more than an abstraction would
+
+## Rule 8: Configurable By Project
+
+Projects may tune:
+
+| Setting | Default |
+|---------|---------|
+| journal_frequency | every sprint, plus notable review/debugging moments |
+| journal_location | sprint-local `JOURNAL.md` and `.agentile/docs/journals/` |
+| essay_threshold | generalizable principle with evidence |
+| case_study_threshold | concrete incident with durable teaching value |
+| honesty_level | direct |
 
 ## Why This Matters
 
-Without journals, the commit history tells you a struct changed in 59 files. The journal tells you WHY that happened and that it should become a builder pattern. That is the difference between a git log and institutional knowledge.
+Without journals, future contributors see a diff and a green check.
+
+With journals, they inherit:
+- what almost went wrong
+- what the model misunderstood
+- what the human corrected
+- what remains risky even after the fix

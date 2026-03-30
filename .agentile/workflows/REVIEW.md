@@ -1,159 +1,126 @@
-# Workflow: REVIEW -- Quality Gates
+# Workflow: REVIEW
 
-> This workflow defines the quality gates for feature completion, sprint completion, and release readiness.
-> Each gate is a checklist. All items must pass before proceeding.
-
----
+Use these gates before marking work complete, closing a sprint, shipping a release, or landing a hotfix.
 
 ## Feature Review Gate
 
-Run this checklist before marking any Work Package as `[x] COMPLETE`.
+Run before marking a work package complete.
 
-### Checklist
-
-```
-FEATURE REVIEW -- WP-<id>: <name>
-Date: YYYY-MM-DD
+```text
+FEATURE REVIEW -- WP-<id>
 
 Code Quality
-[ ] All tests pass
-[ ] Full test suite passes
-[ ] Linter clean (warnings as errors)
-[ ] Formatted
-[ ] No TODOs, FIXMEs, or stubs in new code
-[ ] No lint suppressions without documented justification
+[ ] Relevant tests pass
+[ ] Full required suite passes
+[ ] Linter and typecheck clean
+[ ] Formatting clean
+[ ] No TODOs, FIXMEs, mocks, or stubs in production code
 
-Test Quality
-[ ] New behavior has at least one test
-[ ] Test count increased (or stayed the same with documented reason)
-[ ] Tests are deterministic (no flaky tests introduced)
-[ ] Test names are descriptive
+Traceability
+[ ] Change maps to an active work package
+[ ] Commit or PR references the work package
+[ ] Real data source or contract is named where relevant
 
 Documentation
-[ ] New public items have doc comments
-[ ] Module README updated (if API changed)
-[ ] CHANGELOG entry added (if user-facing change)
+[ ] Module README updated if API changed
+[ ] Root README updated if project-facing behavior changed
+[ ] Root SPIRIT updated if governance or collaboration norms changed
+[ ] CHANGELOG updated if user-facing behavior changed
 
-Security (if applicable)
-[ ] No hardcoded secrets or credentials
-[ ] Input validation for all external inputs
-[ ] Error messages do not leak internal state
-[ ] Reviewed by another contributor (for security-sensitive changes)
+Insight Capture
+[ ] Sprint DAILY.md updated
+[ ] Sprint JOURNAL.md updated or queued
+[ ] Novel fix or interpretation captured, or explicitly noted as not needed
 
-Formal Verification (if applicable)
-[ ] TLA+ spec updated (for critical logic changes)
-[ ] TLC model check passes
-[ ] Invariant tests written (for state machine changes)
+Security / Formality
+[ ] Sensitive changes reviewed appropriately
+[ ] Formal verification or explicit justification added when required
 ```
 
-**GATE:** All applicable items must be checked. DO NOT PROCEED to mark the WP as complete until this checklist passes.
-
----
+Gate: all applicable items pass.
 
 ## Sprint Review Gate
 
-Run this checklist before closing a sprint.
+Run before closing a sprint.
 
-### Checklist
-
-```
-SPRINT REVIEW -- Sprint <id>: <name>
-Date: YYYY-MM-DD
+```text
+SPRINT REVIEW -- Sprint <id>
 
 Completion
-[ ] All WPs are marked [x] COMPLETE or [!] BLOCKED with documented reason
-[ ] Blocked WPs have been moved to the backlog for the next sprint
-[ ] Sprint goal is achieved (or documented as partially achieved with reason)
+[ ] All work packages complete or explicitly blocked
+[ ] Carried work moved to backlog or next sprint
+[ ] Sprint goal achieved or honestly marked partial
 
 Quality
-[ ] Full test suite passes
+[ ] Full suite passes
 [ ] Linter clean
-[ ] Formatted
+[ ] Formatting clean
+[ ] Final test count >= baseline
 
-Test Ratchet
-[ ] Final test count: ______
-[ ] Baseline test count: ______
-[ ] Final >= Baseline: YES / NO
-[ ] If NO: documented reason and remediation plan
+Artifacts
+[ ] SPRINT.md reflects reality
+[ ] DAILY.md reflects actual work sessions
+[ ] JOURNAL.md exists and is honest
+[ ] REPORT.md is ready or drafted
 
-Documentation
-[ ] DAILY.md has entries for all work days
-[ ] SPRINT.md WP statuses are current
-[ ] Module READMEs updated where applicable
-[ ] CHANGELOG updated for user-facing changes
+Docs
+[ ] Public docs updated where needed
+[ ] CHANGELOG updated where needed
 
-Process
-[ ] All commits follow conventional commit format
-[ ] All commits reference a sprint WP
-[ ] AI contributions have Co-Authored-By footer
+Learning
+[ ] Any durable lesson promoted to journal, essay, or case study
+[ ] If nothing rose to that level, the sprint journal says so
 ```
 
-**BLOCKER:** The sprint cannot close if:
-- Test count has decreased (Rule 3)
-- Any test is failing
-- SPRINT.md does not reflect reality
-
----
+Blocker:
+- failing tests
+- decreased test count without replacement
+- missing sprint journal
 
 ## Release Review Gate
 
-Run this checklist before tagging a release.
+Run before tagging a release.
 
-### Checklist
-
-```
+```text
 RELEASE REVIEW -- v<version>
-Date: YYYY-MM-DD
 
-Test Suite
-[ ] Full test suite passes
-[ ] E2E tests pass (if applicable)
-
-Build
+Build And Test
 [ ] Release build succeeds
-[ ] No compiler warnings in release build
+[ ] Full test suite passes
+[ ] CI parity command passes
+
+Governance
+[ ] README reflects the actual product
+[ ] SPIRIT reflects current collaboration and protection norms
+[ ] CHANGELOG is current
 
 Security
-[ ] No known security vulnerabilities in dependencies
-[ ] All critical-path changes have formal verification
-[ ] No hardcoded secrets in the codebase
+[ ] Sensitive changes reviewed
+[ ] No known credential leaks
+[ ] Critical logic has required verification or explicit waiver
 
-Documentation
-[ ] README is current
-[ ] CHANGELOG has entries for all changes since last release
-[ ] API documentation is current
-[ ] Migration guide written (if breaking changes exist)
-
-Performance
-[ ] No performance regressions
+Reflection
+[ ] Significant release lessons are captured
 ```
-
----
 
 ## Hotfix Review Gate
 
-For emergency fixes that bypass the normal sprint cycle.
+For urgent fixes that cannot wait.
 
-### Checklist
-
-```
+```text
 HOTFIX REVIEW -- <description>
-Date: YYYY-MM-DD
 
 Urgency
-[ ] The issue is a production blocker or security vulnerability
-[ ] The fix cannot wait for the next sprint
+[ ] This cannot wait for the normal sprint cycle
 
 Fix Quality
-[ ] All tests pass
+[ ] Regression verified
+[ ] Relevant tests pass
 [ ] Linter clean
-[ ] Regression test added for the specific bug
-[ ] Fix is minimal (no scope creep)
+[ ] Scope stayed minimal
 
-Documentation
-[ ] CHANGELOG entry added
-[ ] Sprint DAILY.md updated with hotfix note
-[ ] Backlog item created for follow-up hardening (if needed)
+Artifacts
+[ ] Sprint records updated
+[ ] CHANGELOG updated
+[ ] Incident journal or case study created if the event taught something durable
 ```
-
-**GATE:** Hotfixes still require passing tests and a regression test. The only thing relaxed is the sprint planning requirement.
