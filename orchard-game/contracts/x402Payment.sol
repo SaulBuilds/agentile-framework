@@ -47,7 +47,7 @@ contract x402PaymentGateway is Ownable, ReentrancyGuard {
         paymentRecipient = msg.sender;
     }
 
-    function getPaymentTerms() public pure returns (PaymentTerms memory) {
+    function getPaymentTerms() public view returns (PaymentTerms memory) {
         return PaymentTerms({
             maxAmount: GAME_ACTION_COST,
             payTo: address(0),

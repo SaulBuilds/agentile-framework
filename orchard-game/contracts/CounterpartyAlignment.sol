@@ -112,10 +112,11 @@ contract CounterpartyAlignment is Ownable {
         }
         
         uint256 matchingBits = 0;
-        bytes32 combinedA = profileA.inputHash ^ profileB.inputHash;
+        bytes32 hashA = profileA.inputHash;
+        bytes32 hashB = profileB.inputHash;
         
         for (uint256 i = 0; i < 256; i++) {
-            if ((combinedA >> i) & 1 == 0) {
+            if ((hashA >> i) == (hashB >> i)) {
                 matchingBits++;
             }
         }
