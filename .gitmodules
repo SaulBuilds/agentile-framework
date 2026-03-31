@@ -1,0 +1,3 @@
+[submodule "orchard-game/lib/forge-std"]
+	path = orchard-game/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std.git

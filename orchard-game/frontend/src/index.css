@@ -1,0 +1,501 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+}
+
+.App {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.App-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.App-header h1 {
+  color: #4ade80;
+  margin-bottom: 10px;
+}
+
+.ort-balance {
+  background: #10b981;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.mode-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.mode-tabs button {
+  background: #374151;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.mode-tabs button:hover {
+  background: #4b5563;
+}
+
+.mode-tabs button.active {
+  background: #4ade80;
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status-info {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.status-error {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.status-loading {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.clear-button {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.game-controls {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.seed-planting-form {
+  background: #16213e;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.seed-planting-form h2 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.seed-planting-form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.seed-planting-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #e0e0e0;
+  margin-top: 5px;
+}
+
+.seed-planting-form button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.seed-planting-form button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+.game-display {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-display h2 {
+  color: #4ade80;
+  text-align: center;
+}
+
+.garden-container {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 300px;
+  margin-bottom: 20px;
+}
+
+.seed-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.seed-card {
+  background: #16213e;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #374151;
+}
+
+.seed-card h4 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.seed-card button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.seed-card button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+.federation-manager,
+.duel-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.federation-manager h2,
+.duel-manager h2 {
+  color: #4ade80;
+  text-align: center;
+}
+
+.federation-stats,
+.duel-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: #16213e;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-card h4 {
+  margin: 0 0 10px;
+  color: #9ca3af;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4ade80;
+}
+
+.federation-actions,
+.duel-actions {
+  margin-bottom: 30px;
+}
+
+.action-panel {
+  background: #16213e;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.action-panel h3 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.federation-actions label,
+.duel-form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.federation-actions input,
+.federation-actions select,
+.duel-form input,
+.duel-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #e0e0e0;
+  margin-top: 5px;
+}
+
+.action-panel button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.action-panel button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+.federations-list h3,
+.duels-list h3 {
+  color: #4ade80;
+  margin-bottom: 20px;
+}
+
+.federation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.federation-card {
+  background: #16213e;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #374151;
+}
+
+.federation-card.my-federation {
+  border-color: #4ade80;
+}
+
+.federation-card h4 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.federation-card p {
+  margin: 8px 0;
+}
+
+.federation-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.federation-buttons button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.federation-buttons button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+.my-member-info {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #374151;
+}
+
+.my-member-info h5 {
+  margin: 0 0 10px;
+  color: #9ca3af;
+}
+
+.staked-seeds {
+  margin-top: 10px;
+}
+
+.staked-seed-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #1f2937;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+.staked-seed-item button {
+  background: #f87171;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.duel-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.duel-tabs button {
+  background: #374151;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.duel-tabs button.active {
+  background: #4ade80;
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+.duel-card {
+  background: #16213e;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #374151;
+}
+
+.duel-card.incoming {
+  border-color: #fbbf24;
+}
+
+.duel-card.initiated {
+  border-color: #60a5fa;
+}
+
+.duel-card.completed.win {
+  border-color: #4ade80;
+}
+
+.duel-card.completed.loss {
+  border-color: #f87171;
+}
+
+.duel-card.completed.draw {
+  border-color: #9ca3af;
+}
+
+.duel-card h4 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.duel-card p {
+  margin: 8px 0;
+}
+
+.duel-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.duel-buttons button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.duel-buttons button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+.empty-message {
+  text-align: center;
+  color: #9ca3af;
+  padding: 40px;
+}
+
+.federation-messages,
+.duel-messages {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.game-controls {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-controls .game-controls button {
+  background: #4ade80;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.game-controls .game-controls button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}

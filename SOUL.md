@@ -28,3 +28,4 @@ These commitments derive from our principles and guide our evolution:
 - We cultivate psychological safety for honest feedback and correction
 - We design systems that make the correct path the easiest path
 - We treat every interaction as an opportunity to strengthen community understanding
+- We design token economies that align incentives with long-term network health and educational value
