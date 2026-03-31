@@ -111,6 +111,54 @@ async function main() {
     console.log("MysteryBox:", mysteryBox.target);
     await mysteryBox.deploymentTransaction().wait(confirmations);
 
+    // 14. Deploy AIValidator
+    console.log("\n14. Deploying AIValidator...");
+    const AIValidator = await hre.ethers.getContractFactory("AIValidator");
+    const aiValidator = await AIValidator.deploy();
+    await aiValidator.waitForDeploy();
+    console.log("AIValidator:", aiValidator.target);
+    await aiValidator.deploymentTransaction().wait(confirmations);
+
+    // 15. Deploy VerifiableGrowth
+    console.log("\n15. Deploying VerifiableGrowth...");
+    const VerifiableGrowth = await hre.ethers.getContractFactory("VerifiableGrowth");
+    const verifiableGrowth = await VerifiableGrowth.deploy();
+    await verifiableGrowth.waitForDeploy();
+    console.log("VerifiableGrowth:", verifiableGrowth.target);
+    await verifiableGrowth.deploymentTransaction().wait(confirmations);
+
+    // 16. Deploy AIFederation
+    console.log("\n16. Deploying AIFederation...");
+    const AIFederation = await hre.ethers.getContractFactory("AIFederation");
+    const aiFederation = await AIFederation.deploy();
+    await aiFederation.waitForDeploy();
+    console.log("AIFederation:", aiFederation.target);
+    await aiFederation.deploymentTransaction().wait(confirmations);
+
+    // 17. Deploy SmartDuel
+    console.log("\n17. Deploying SmartDuel...");
+    const SmartDuel = await hre.ethers.getContractFactory("SmartDuel");
+    const smartDuel = await SmartDuel.deploy();
+    await smartDuel.waitForDeploy();
+    console.log("SmartDuel:", smartDuel.target);
+    await smartDuel.deploymentTransaction().wait(confirmations);
+
+    // 18. Deploy IdeaNFT
+    console.log("\n18. Deploying IdeaNFT...");
+    const IdeaNFT = await hre.ethers.getContractFactory("IdeaNFT");
+    const ideaNFT = await IdeaNFT.deploy();
+    await ideaNFT.waitForDeploy();
+    console.log("IdeaNFT:", ideaNFT.target);
+    await ideaNFT.deploymentTransaction().wait(confirmations);
+
+    // 19. Deploy GameAIOracle
+    console.log("\n19. Deploying GameAIOracle...");
+    const GameAIOracle = await hre.ethers.getContractFactory("GameAIOracle");
+    const gameAIOracle = await GameAIOracle.deploy();
+    await gameAIOracle.waitForDeploy();
+    console.log("GameAIOracle:", gameAIOracle.target);
+    await gameAIOracle.deploymentTransaction().wait(confirmations);
+
     console.log("\n=== Deployment Complete ===");
     console.log("\nContract Addresses:");
     console.log("ORTToken:", ortToken.target);
@@ -126,6 +174,12 @@ async function main() {
     console.log("SeasonManager:", seasonManager.target);
     console.log("MentorProtocol:", mentorProtocol.target);
     console.log("MysteryBox:", mysteryBox.target);
+    console.log("AIValidator:", aiValidator.target);
+    console.log("VerifiableGrowth:", verifiableGrowth.target);
+    console.log("AIFederation:", aiFederation.target);
+    console.log("SmartDuel:", smartDuel.target);
+    console.log("IdeaNFT:", ideaNFT.target);
+    console.log("GameAIOracle:", gameAIOracle.target);
 }
 
 main()
