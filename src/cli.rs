@@ -1,7 +1,6 @@
 use clap::{Parser, Subcommand};
 use tracing::{info};
 
-use crate::mcp::start_mcp_server;
 use crate::state_space::StateSpaceSystem;
 use nalgebra::{DMatrix, DVector};
 

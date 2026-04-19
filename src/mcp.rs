@@ -26,6 +26,12 @@ pub struct MusicBoxMcpState {
     pub state_space_systems: Arc<Mutex<std::collections::HashMap<String, StateSpaceSystem>>>,
 }
 
+impl Default for MusicBoxMcpState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MusicBoxMcpState {
     /// Create a new MCP server state
     pub fn new() -> Self {

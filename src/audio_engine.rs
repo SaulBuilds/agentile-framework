@@ -13,14 +13,24 @@ pub struct AudioEngine {
     pub buffer_size: usize,
 }
 
+impl Default for AudioEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AudioEngine {
-    /// Create a new audio engine
+    /// Create a new audio engine with default settings
     pub fn new() -> Self {
         info!("Creating audio engine");
         Self {
             sample_rate: 44100,
             buffer_size: 512,
+            stream_handle: None,
+            sink: None,
         }
+    }
+}
     }
 
     /// Start the audio engine
