@@ -1,0 +1,35 @@
+[package]
+name = "state-space-music-box"
+version = "0.1.0"
+edition = "2021"
+description = "A Rust library for generating procedural music based on state space representations"
+repository = "https://github.com/yourusername/state-space-music-box"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+nalgebra = "0.33"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt"] }
+clap = { version = "4.0", features = ["derive"] }
+rand = "0.8"
+
+[dev-dependencies]
+proptest = "1.4"
+approx = "0.5"
+
+[features]
+default = ["std"]
+std = []
+# Optional features for different backends
+vst = []
+audio-unit = []
+jack = []
+# Optional features for extended functionality
+serde-support = []
+rayon = []
+# MCP features
+mcp = []

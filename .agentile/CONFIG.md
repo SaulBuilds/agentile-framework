@@ -6,11 +6,11 @@ This file is the canonical source for repo-specific facts. When commands, names,
 
 | Key | Value |
 |-----|-------|
-| Project Name | `<PROJECT_NAME>` |
-| Repository Purpose | `<WHAT_THIS_REPO_BUILDS_OR_OPERATES>` |
-| Primary Domain | `<WEB_APP | API | INFRA | SDK | DATA | ML | PROTOCOL | OTHER>` |
-| Current Phase | `<GREENFIELD | RETROFIT | DEBUGGING | CI_STABILIZATION | PRE_PROD | PRODUCTION>` |
-| Primary Users | `<WHO_THIS_PROJECT_SERVES>` |
+| Project Name | state-space-music-box |
+| Repository Purpose | A library for generating procedural music based on state space representations |
+| Primary Domain | SDK |
+| Current Phase | GREENFIELD |
+| Primary Users | Both developers and end users |
 
 ## Collaboration Context
 
@@ -25,13 +25,13 @@ This file is the canonical source for repo-specific facts. When commands, names,
 
 | Layer | Technology |
 |-------|------------|
-| Primary Languages | `<LANGUAGES>` |
-| Frameworks / Runtimes | `<FRAMEWORKS_OR_RUNTIMES>` |
-| Package / Build Tooling | `<PACKAGE_MANAGERS_AND_BUILD_SYSTEMS>` |
-| Storage / State | `<DATABASES_QUEUES_FILESYSTEM_ETC>` |
-| Test Tooling | `<TEST_COMMANDS_AND_FRAMEWORKS>` |
-| Lint / Static Analysis | `<LINTERS_TYPECHECKERS_SECURITY_SCANNERS>` |
-| Formal Verification | `<OPTIONAL_TOOLING_OR_NA>` |
+| Primary Languages | Rust |
+| Frameworks / Runtimes | Tokio (async), rodio (audio output) |
+| Package / Build Tooling | Cargo |
+| Storage / State | In-memory state representation |
+| Test Tooling | cargo test, proptest (property-based testing) |
+| Lint / Static Analysis | clippy, rustfmt |
+| Formal Verification | MIRAI (optional) |
 
 ## Core Commands
 

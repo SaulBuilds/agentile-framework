@@ -7,17 +7,17 @@
 
 | Field | Value |
 |-------|-------|
-| **Sprint ID** | *(none yet)* |
-| **Sprint Name** | *(none yet)* |
-| **Goal** | *(define your first sprint goal)* |
-| **Status** | NOT STARTED |
-| **Directory** | `.agentile/sprints/active/sprint-1-<name>/` |
+| **Sprint ID** | sprint-1-foundation |
+| **Sprint Name** | Foundation |
+| **Goal** | Implement core state space system, MIDI models, instrument models, effect models, VST synthesizer interface, audio engine, and basic CLI/MCP server scaffolding |
+| **Status** | IN PROGRESS |
+| **Directory** | `.agentile/sprints/active/sprint-1-foundation/` |
 
 ## Test Counts
 
 | Suite | Count |
 |-------|-------|
-| Total | 0 |
+| Total | 23 |
 
 ## Getting Started
 

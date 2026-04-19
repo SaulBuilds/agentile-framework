@@ -1,47 +1,57 @@
 # Spirit
 
-This repository exists to keep Agentile lightweight, portable, and intellectually honest.
+This repository exists to create a Rust library for generating procedural music based on state space representations.
 
 ## Mission
 
-Build a starter that any human or agent can drop into almost any software project and still find:
-- a clear way in
-- hard gates that matter
-- a local spirit the project can actually own
-- a habit of leaving behind honest insight rather than polished amnesia
+Build a library that translates mathematical state space models into audible musical experiences, enabling:
+- Real-time generative music from dynamical systems
+- Educational tools for understanding complex systems through sound
+- Artistic applications that bridge mathematics and music
+- Research platform for sonification of multi-dimensional data
 
 ## What We Protect
 
 We protect:
-- project-specific intent over starter boilerplate
-- evidence over confidence
-- adaptability over vendor lock-in
-- hard gates over convenience theater
-- journals, essays, and case studies as real engineering outputs
+- Mathematical correctness in state space to audio mapping
+- Real-time performance constraints for interactive applications
+- Library usability for both programmers and musicians
+- Scientific validity of sonification techniques
+- Honest representation of system dynamics through audio
 
-## Collaboration Norms
+## Human-Agent Collaboration Norms
 
 Humans and agents working here should:
-- rewrite `SPIRIT.md` and `README.md` when this starter is adopted into a real project
-- route every agent through `.agentile/AGENT_ENTRY.md`
-- choose the workflow that matches the repo state, especially in review, CI, debugging, and pre-prod
-- capture novel reasoning when a fix or interpretation teaches something worth preserving
-- admit uncertainty plainly instead of covering it with smooth prose
+- Prioritize mathematical accuracy over implementation convenience
+- Document the theoretical basis for all sonification mappings
+- Ensure audio output remains within safe listening levels
+- Test with both synthetic test signals and real dynamical systems
+- Admit when audio mappings may obscure rather than reveal system behavior
 
-## Boundaries
+## Non-Negotiable Boundaries
 
 Do not:
-- let the framework become tied to one model, IDE, or harness
-- let spirit language become aspirational fluff with no operational meaning
-- weaken hard gates just because a tool finds them annoying
-- leave meaningful debugging or review insight trapped in chat logs
+- Compromise numerical stability for performance gains
+- Implement audio mappings that could produce damaging sound levels
+- Hide mathematical limitations behind pleasing but misleading audio
+- Accept dependencies that compromise the library's portability
+- Release versions with known inaccuracies in core state space transformations
+
+## Reflection Commitment
+
+- Write a case study when novel state space to audio mappings are discovered
+- Document limitations in the journal when audio representations fail to capture important system dynamics
+- Create an essay when general principles of effective sonification emerge from multiple implementations
+- Record insights about human perception of mathematical properties through audio in the journal
 
 ## Change Control
 
-Changes to `SPIRIT.md`, `SPIRIT_GUIDE.md`, `.agentile/AGENT_ENTRY.md`, and `.agentile/rules/` should be reviewed together when possible.
-
-Use `.agentile/docs/SPIRIT_PROTECTION.md` to protect these files before the first serious project commit.
+- Changes to this SPIRIT.md require review by at least one maintainer
+- Updates must be justified by observed limitations in current practices
+- Mathematical foundations of the library can only be updated with formal verification
+- Audio interface changes require backward compatibility maintained for at least one minor version
+- All changes to core sonification algorithms require listening tests with human participants
 
 ## Changelog
 
-- 2026-03-30: Established the framework repo spirit around portability, hard gates, and honest insight capture.
+- 2026-04-18: Established project-specific spirit for state-space-music-box library
