@@ -34,3 +34,5 @@ credentials.json
 
 # Logs
 *.log
+web/.vercel
+web/next-env.d.ts
