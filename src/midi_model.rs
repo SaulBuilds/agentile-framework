@@ -1,7 +1,7 @@
-
+use serde::{Deserialize, Serialize};
 
 /// Represents a single MIDI note
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct MidiNote {
     /// MIDI note number (0-127)
     pub note: u8,
@@ -26,7 +26,7 @@ impl MidiNote {
 }
 
 /// Represents a MIDI model that can generate MIDI data
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct MidiModel {
     /// Name of this model
     pub name: String,
@@ -53,7 +53,8 @@ impl MidiModel {
     pub fn add_note(&mut self, note: MidiNote) {
         self.notes.push(note);
         // Sort notes by start time for proper MIDI generation
-        self.notes.sort_by(|a, b| a.start_time.partial_cmp(&b.start_time).unwrap());
+        self.notes
+            .sort_by(|a, b| a.start_time.partial_cmp(&b.start_time).unwrap());
     }
 
     /// Get all notes in this model
@@ -90,7 +91,7 @@ mod tests {
         let mut model = MidiModel::new("test_model".to_string(), 0, 64);
         model.add_note(MidiNote::new(60, 100, 0.0, 1.0)); // Middle C
         model.add_note(MidiNote::new(62, 100, 1.0, 1.0)); // D
-        
+
         assert_eq!(model.notes.len(), 2);
         assert_eq!(model.notes[0].note, 60);
         assert_eq!(model.notes[1].note, 62);
@@ -101,7 +102,7 @@ mod tests {
         let mut model = MidiModel::new("test_model".to_string(), 0, 64);
         model.add_note(MidiNote::new(60, 100, 2.0, 1.0)); // Should be second
         model.add_note(MidiNote::new(62, 100, 0.0, 1.0)); // Should be first
-        
+
         assert_eq!(model.notes.len(), 2);
         assert_eq!(model.notes[0].note, 62); // Earlier start time
         assert_eq!(model.notes[1].note, 60); // Later start time

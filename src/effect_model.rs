@@ -60,7 +60,7 @@ mod tests {
         model.set_parameter("delay_time", 0.3);
         model.set_parameter("feedback", 0.5);
         model.set_parameter("mix", 0.7);
-        
+
         assert_eq!(model.get_parameter("delay_time"), Some(&0.3));
         assert_eq!(model.get_parameter("feedback"), Some(&0.5));
         assert_eq!(model.get_parameter("mix"), Some(&0.7));
@@ -73,7 +73,7 @@ mod tests {
         model.set_parameter("drive", 0.8);
         model.set_parameter("tone", 0.6);
         model.set_parameter("level", 0.9);
-        
+
         let params = model.parameters();
         assert_eq!(params.len(), 3);
         assert_eq!(params.get("drive"), Some(&0.8));

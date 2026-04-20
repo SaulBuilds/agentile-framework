@@ -1,10 +1,15 @@
 [package]
 name = "state-space-music-box"
-version = "0.1.0"
+version = "0.2.0-beta.1"
 edition = "2021"
-description = "A Rust library for generating procedural music based on state space representations"
-repository = "https://github.com/yourusername/state-space-music-box"
+rust-version = "1.75"
+description = "A Rust library for generating procedural music based on state space representations. Deterministic MIDI/WAV generation, MCP tool server, governance, and agent harness for Agentic DJ workflows."
+authors = ["Larry Klosowski <saulbuilds@users.noreply.github.com>"]
+repository = "https://github.com/saulbuilds/agentile-framework"
 license = "MIT OR Apache-2.0"
+keywords = ["music", "midi", "state-space", "procedural-generation", "audio"]
+categories = ["multimedia::audio", "science", "command-line-utilities"]
+readme = "README.md"
 
 [dependencies]
 nalgebra = "0.33"
@@ -14,12 +19,24 @@ thiserror = "1.0"
 anyhow = "1.0"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["fmt"] }
-clap = { version = "4.0", features = ["derive"] }
+clap = { version = "4.0", features = ["derive", "env"] }
 rand = "0.8"
+hound = "3.5.1"
+midly = "0.5.3"
+rmcp = { version = "1.5.0", default-features = false, features = ["server", "client", "macros", "transport-io"] }
+tokio = { version = "1.48.0", features = ["macros", "rt-multi-thread", "io-std", "net", "signal"] }
+schemars = "1.2.1"
+sha2 = "0.10"
+hex = "0.4"
+rosc = "0.10"
+axum = "0.8"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
 
 [dev-dependencies]
 proptest = "1.4"
 approx = "0.5"
+tempfile = "3.20.0"
+reqwest = { version = "0.12", features = ["blocking", "json"] }
 
 [features]
 default = ["std"]

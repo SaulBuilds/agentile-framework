@@ -1,5 +1,5 @@
-use std::collections::{HashMap, VecDeque};
 use serde::{Deserialize, Serialize};
+use std::collections::{HashMap, VecDeque};
 use thiserror::Error;
 
 /// Represents a state in a state machine
@@ -60,16 +60,16 @@ impl Transition {
 pub enum StateMachineError {
     #[error("State not found: {0}")]
     StateNotFound(String),
-    
+
     #[error("Initial state not set")]
     InitialStateNotSet,
-    
+
     #[error("No valid transition from state '{from}' with event '{event}'")]
     NoValidTransition { from: String, event: String },
-    
+
     #[error("Transition condition evaluated to false")]
     ConditionFalse,
-    
+
     #[error("Other error: {0}")]
     Other(#[from] anyhow::Error),
 }
@@ -126,7 +126,10 @@ impl StateMachine {
     }
 
     /// Set the initial state of the machine
-    pub fn set_initial_state<S: Into<String>>(&mut self, state_id: S) -> Result<(), StateMachineError> {
+    pub fn set_initial_state<S: Into<String>>(
+        &mut self,
+        state_id: S,
+    ) -> Result<(), StateMachineError> {
         let state_id = state_id.into();
         if !self.states.contains_key(&state_id) {
             return Err(StateMachineError::StateNotFound(state_id));
@@ -142,7 +145,9 @@ impl StateMachine {
 
     /// Get the current state
     pub fn current_state(&self) -> Option<&State> {
-        self.current_state.as_ref().and_then(|id| self.states.get(id))
+        self.current_state
+            .as_ref()
+            .and_then(|id| self.states.get(id))
     }
 
     /// Queue an event for processing
@@ -201,12 +206,15 @@ impl StateMachine {
 
     /// Perform a state transition based on an event
     fn transition(&mut self, event: &str) -> Result<(), StateMachineError> {
-        let current_state_id = self.current_state.as_ref()
+        let current_state_id = self
+            .current_state
+            .as_ref()
             .ok_or(StateMachineError::InitialStateNotSet)?
             .clone();
 
         // Find all valid transitions from the current state with this event
-        let mut valid_transitions: Vec<&Transition> = self.transitions
+        let mut valid_transitions: Vec<&Transition> = self
+            .transitions
             .iter()
             .filter(|t| t.from == current_state_id)
             .filter(|t| {
@@ -235,15 +243,19 @@ impl StateMachine {
 
         // Take the highest priority valid transition
         if let Some(transition) = valid_transitions.first() {
-            // Execute action if specified
             if let Some(action) = &transition.action {
-                // In a real implementation, we would execute the action
+                // Action strings are descriptive transition metadata owned by the caller.
                 tracing::debug!("Executing action: {}", action);
             }
 
             // Change state
             self.current_state = Some(transition.to.clone());
-            tracing::debug!("Transitioned from {} to {} via event {}", current_state_id, transition.to, event);
+            tracing::debug!(
+                "Transitioned from {} to {} via event {}",
+                current_state_id,
+                transition.to,
+                event
+            );
             Ok(())
         } else {
             Err(StateMachineError::NoValidTransition {
@@ -279,7 +291,7 @@ mod tests {
         let mut sm = StateMachine::new();
         let state = State::new("state1", Some(json!({"value": 42})));
         sm.add_state(state);
-        
+
         assert_eq!(sm.states.len(), 1);
         assert!(sm.states.contains_key("state1"));
         let state = sm.states.get("state1").unwrap();
@@ -292,10 +304,16 @@ mod tests {
         let mut sm = StateMachine::new();
         sm.add_state(State::new("state1", None));
         sm.add_state(State::new("state2", None));
-        
-        let transition = Transition::new("state1", "state2", Some("condition".to_string()), Some("action".to_string()), 10);
+
+        let transition = Transition::new(
+            "state1",
+            "state2",
+            Some("condition".to_string()),
+            Some("action".to_string()),
+            10,
+        );
         sm.add_transition(transition);
-        
+
         assert_eq!(sm.transitions.len(), 1);
         assert_eq!(sm.transitions[0].from, "state1");
         assert_eq!(sm.transitions[0].to, "state2");
@@ -309,10 +327,10 @@ mod tests {
         let mut sm = StateMachine::new();
         sm.add_state(State::new("state1", None));
         sm.add_state(State::new("state2", None));
-        
+
         assert!(sm.set_initial_state("state1").is_ok());
         assert_eq!(sm.current_state_id(), Some(&"state1".to_string()));
-        
+
         assert!(sm.set_initial_state("nonexistent").is_err());
     }
 
@@ -322,19 +340,25 @@ mod tests {
         sm.add_state(State::new("state1", None));
         sm.add_state(State::new("state2", None));
         sm.add_state(State::new("state3", None));
-        
+
         // Add transitions
         sm.add_transition(Transition::new("state1", "state2", None, None, 10));
-        sm.add_transition(Transition::new("state1", "state3", Some("go_to_state3".to_string()), None, 5));
-        
+        sm.add_transition(Transition::new(
+            "state1",
+            "state3",
+            Some("go_to_state3".to_string()),
+            None,
+            5,
+        ));
+
         sm.set_initial_state("state1").unwrap();
         sm.start().unwrap();
-        
+
         // Process an event that triggers the first transition (no condition, higher priority)
         sm.queue_event("go_to_state2");
         assert!(sm.process_next_event().unwrap().is_some());
         assert_eq!(sm.current_state_id(), Some(&"state2".to_string()));
-        
+
         // Reset and test conditional transition
         sm.set_initial_state("state1").unwrap();
         sm.queue_event("go_to_state3");
@@ -347,10 +371,10 @@ mod tests {
         let mut sm = StateMachine::new();
         sm.add_state(State::new("state1", None));
         sm.add_state(State::new("state2", None));
-        
+
         sm.set_initial_state("state1").unwrap();
         sm.start().unwrap();
-        
+
         // Queue an event with no matching transition
         sm.queue_event("nonexistent_event");
         assert!(sm.process_next_event().is_err());

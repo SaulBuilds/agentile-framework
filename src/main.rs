@@ -1,5 +1,5 @@
-use state_space_music_box::Cli;
 use clap::Parser;
+use state_space_music_box::Cli;
 use std::process;
 
 fn main() {
