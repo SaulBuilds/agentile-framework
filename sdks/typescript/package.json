@@ -1,0 +1,23 @@
+{
+  "name": "@saulbuilds/music-box-sdk",
+  "version": "0.2.0-beta.1",
+  "description": "TypeScript SDK for the state-space-music-box HTTP API. Generate procedural music, manage sessions, evaluate outputs, and control the Agentic DJ stack.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["music", "midi", "state-space", "procedural-generation", "agentic-dj", "mcp"],
+  "author": "Larry Klosowski <saulbuilds@users.noreply.github.com>",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaulBuilds/agentile-framework",
+    "directory": "sdks/typescript"
+  },
+  "files": ["dist/", "README.md"],
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}

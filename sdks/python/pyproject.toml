@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "music-box-sdk"
+version = "0.2.0b1"
+description = "Python SDK for the state-space-music-box HTTP API. Generate procedural music, manage sessions, evaluate outputs, and control the Agentic DJ stack."
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+authors = [{ name = "Larry Klosowski", email = "saulbuilds@users.noreply.github.com" }]
+requires-python = ">=3.9"
+dependencies = ["httpx>=0.27"]
+keywords = ["music", "midi", "state-space", "procedural-generation", "agentic-dj"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/SaulBuilds/agentile-framework"
+Repository = "https://github.com/SaulBuilds/agentile-framework"
+Documentation = "https://github.com/SaulBuilds/agentile-framework/blob/main/docs/AGENT_GUIDE.md"

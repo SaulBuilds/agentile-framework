@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+music_box_sdk/__init__.py
+music_box_sdk/client.py
+music_box_sdk.egg-info/PKG-INFO
+music_box_sdk.egg-info/SOURCES.txt
+music_box_sdk.egg-info/dependency_links.txt
+music_box_sdk.egg-info/requires.txt
+music_box_sdk.egg-info/top_level.txt
